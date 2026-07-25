@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-full select-none">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>uPlayer - Material You Player</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root, [data-theme="obsidian"] {
+            /* Default Pixel Obsidian Theme */
+            --md-sys-color-background: #0f1417;
+            --md-sys-color-surface: #1a2024;
+            --md-sys-color-surface-variant: #283137;
+            --md-sys-color-primary: #a1cddb;
+            --md-sys-color-on-primary: #003544;
+            --md-sys-color-primary-container: #1f4d5b;
+            --md-sys-color-on-primary-container: #cbe6f2;
+            --md-sys-color-secondary-container: #364951;
+            --md-sys-color-on-secondary-container: #d2e5f0;
+            --md-sys-color-text: #e1e3e5;
+            --md-sys-color-text-sub: #8b99a1;
+            --md-sys-color-outline: #40484d;
+            --md-sys-glow: rgba(161, 205, 219, 0.25);
+        }
+
+        [data-theme="coral"] {
+            --md-sys-color-background: #191211;
+            --md-sys-color-surface: #271d1b;
+            --md-sys-color-surface-variant: #3a2c28;
+            --md-sys-color-primary: #ffb4a9;
+            --md-sys-color-on-primary: #561e18;
+            --md-sys-color-primary-container: #73332c;
+            --md-sys-color-on-primary-container: #ffdad5;
+            --md-sys-color-secondary-container: #534340;
+            --md-sys-color-on-secondary-container: #f5ddd9;
+            --md-sys-color-text: #f0dfdc;
+            --md-sys-color-text-sub: #a08c89;
+            --md-sys-color-outline: #534340;
+            --md-sys-glow: rgba(255, 180, 169, 0.25);
+        }
+
+        [data-theme="seafoam"] {
+            --md-sys-color-background: #0e1513;
+            --md-sys-color-surface: #18221f;
+            --md-sys-color-surface-variant: #25332e;
+            --md-sys-color-primary: #8cd6c0;
+            --md-sys-color-on-primary: #00382d;
+            --md-sys-color-primary-container: #005142;
+            --md-sys-color-on-primary-container: #a8f2dc;
+            --md-sys-color-secondary-container: #344c45;
+            --md-sys-color-on-secondary-container: #cde8de;
+            --md-sys-color-text: #e1e3e0;
+            --md-sys-color-text-sub: #8a938f;
+            --md-sys-color-outline: #3f4945;
+            --md-sys-glow: rgba(140, 214, 192, 0.25);
+        }
+
+        [data-theme="berry"] {
+            --md-sys-color-background: #171116;
+            --md-sys-color-surface: #241a22;
+            --md-sys-color-surface-variant: #362833;
+            --md-sys-color-primary: #f0b0e2;
+            --md-sys-color-on-primary: #4a1d46;
+            --md-sys-color-primary-container: #63335e;
+            --md-sys-color-on-primary-container: #ffd7f5;
+            --md-sys-color-secondary-container: #4e3a4b;
+            --md-sys-color-on-secondary-container: #f5d9f0;
+            --md-sys-color-text: #efdfeb;
+            --md-sys-color-text-sub: #9e8b9a;
+            --md-sys-color-outline: #4f3d4c;
+            --md-sys-glow: rgba(240, 176, 226, 0.25);
+        }
+
+        [data-theme="lime"] {
+            --md-sys-color-background: #13140c;
+            --md-sys-color-surface: #1f2015;
+            --md-sys-color-surface-variant: #2e3121;
+            --md-sys-color-primary: #c2ee69;
+            --md-sys-color-on-primary: #2b3600;
+            --md-sys-color-primary-container: #3f4e00;
+            --md-sys-color-on-primary-container: #deff89;
+            --md-sys-color-secondary-container: #434a31;
+            --md-sys-color-on-secondary-container: #e0e7c8;
+            --md-sys-color-text: #e4e3d9;
+            --md-sys-color-text-sub: #909283;
+            --md-sys-color-outline: #46483c;
+            --md-sys-glow: rgba(194, 238, 105, 0.25);
+        }
+
+        body {
+            font-family: 'Google Sans', 'Roboto', sans-serif;
+            background-color: var(--md-sys-color-background);
+            color: var(--md-sys-color-text);
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .md-surface { background-color: var(--md-sys-color-surface); }
+        .md-surface-variant { background-color: var(--md-sys-color-surface-variant); }
+        .md-primary-container {
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+        }
+        .md-pill-active {
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+        }
+
+        /* Custom Audio Slider */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]:focus { outline: none; }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: var(--md-sys-color-surface-variant);
+            border-radius: 9999px;
+            transition: background 0.2s;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            height: 20px;
+            width: 10px;
+            border-radius: 9999px;
+            background: var(--md-sys-color-primary);
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -6px;
+            box-shadow: 0 0 10px var(--md-sys-glow);
+            transition: transform 0.15s ease, background-color 0.2s;
+        }
+
+        input[type=range]:active::-webkit-slider-thumb {
+            transform: scaleX(1.4) scaleY(0.9);
+            background: var(--md-sys-color-on-primary-container);
+        }
+
+        /* Material Symbols Utilities */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            transition: font-variation-settings 0.2s ease;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1;
+        }
+
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+        }
+
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb {
+            background: var(--md-sys-color-surface-variant);
+            border-radius: 999px;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="h-[100dvh] w-full flex justify-center items-center p-0 overflow-hidden" style="background-color: var(--md-sys-color-background);">
+
+    <!-- Главный контейнер с адаптивной шириной и центрированием под любые экраны -->
+    <div id="phoneFrame" class="w-full h-full sm:max-w-xl md:max-w-3xl lg:max-w-4xl sm:h-[92dvh] sm:rounded-[32px] sm:border sm:border-white/10 shadow-2xl overflow-hidden flex flex-col relative bg-cover bg-center transition-all duration-500" style="background-color: var(--md-sys-color-background);">
+
+        <!-- Custom Wallpaper Overlay -->
+        <div id="customBgOverlay" class="absolute inset-0 pointer-events-none transition-all duration-300 z-0 bg-cover bg-center" style="opacity: 0;"></div>
+        <div id="customBgDimmer" class="absolute inset-0 pointer-events-none transition-all duration-300 z-0 bg-black/40" style="opacity: 0;"></div>
+
+        <!-- Header -->
+        <header class="px-5 pt-4 pb-2 flex justify-between items-center z-30 shrink-0 border-b border-white/5 backdrop-blur-md">
+            <div>
+                <h1 class="text-base font-bold tracking-tight leading-tight" style="color: var(--md-sys-color-text);">uPlayer</h1>
+                <p class="text-[11px] font-medium" style="color: var(--md-sys-color-text-sub);">Material You Player</p>
+            </div>
+
+            <div class="flex items-center space-x-1">
+                <button id="addFilesTopBtn" title="Добавить файлы" class="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-colors hover:bg-white/5 active:bg-white/10" style="color: var(--md-sys-color-text);">
+                    <span class="material-symbols-outlined text-2xl">add_circle</span>
+                </button>
+                <button id="themeToggleBtn" title="Сменить тему Monet" class="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-white/5 active:bg-white/10" style="color: var(--md-sys-color-text);">
+                    <span class="material-symbols-outlined text-2xl">palette</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Hidden Native File Inputs -->
+        <input type="file" id="fileInput" multiple accept="audio/*" class="hidden">
+        <input type="file" id="folderInput" multiple accept="audio/*" webkitdirectory directory class="hidden">
+
+        <!-- Scrollable Body Content -->
+        <div class="flex-1 overflow-y-auto relative px-4 sm:px-6 md:px-10 pt-4 pb-32 z-10 max-w-2xl mx-auto w-full" id="mainContentScroll">
+            
+            <!-- EMPTY STATE -->
+            <div id="emptyStateContainer" class="flex flex-col items-center justify-center min-h-[420px] text-center px-2 space-y-5 my-auto">
+                <div class="w-20 h-20 rounded-full flex items-center justify-center shadow-lg animate-bounce" style="background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-primary);">
+                    <span class="material-symbols-outlined text-4xl">library_music</span>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold" style="color: var(--md-sys-color-text);">Медиатека пуста</h3>
+                    <p class="text-xs mt-1.5 max-w-[290px] mx-auto leading-relaxed" style="color: var(--md-sys-color-text-sub);">
+                        Нажмите кнопку ниже и выберите аудиофайлы. Плеер автоматически добавит их и сохранит в памяти устройства!
+                    </p>
+                </div>
+                <div class="flex flex-col w-full space-y-2.5 max-w-[280px]">
+                    <button id="addFilesEmptyBtn" class="w-full py-3 px-4 rounded-full font-bold text-xs flex items-center justify-center space-x-2 transition-transform active:scale-95 shadow-md cursor-pointer" style="background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);">
+                        <span class="material-symbols-outlined text-lg">audio_file</span>
+                        <span>Выбрать аудиофайлы</span>
+                    </button>
+                    <button id="addFolderEmptyBtn" class="w-full py-2.5 px-4 rounded-full font-medium text-xs flex items-center justify-center space-x-2 transition-transform active:scale-95 border border-white/10 cursor-pointer" style="background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-text);">
+                        <span class="material-symbols-outlined text-lg">folder_open</span>
+                        <span>Выбрать папку</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- VIEW 1: NOW PLAYING -->
+            <section id="viewNowPlaying" class="space-y-5 transition-all duration-300 hidden max-w-md mx-auto">
+                
+                <!-- Album Art & Spectrum Canvas -->
+                <div class="relative w-full aspect-square rounded-[32px] overflow-hidden shadow-2xl flex items-center justify-center border border-white/5" style="background-color: var(--md-sys-color-surface);">
+                    <canvas id="visualizerCanvas" class="absolute inset-0 w-full h-full z-10 opacity-70 pointer-events-none"></canvas>
+                    
+                    <div id="albumCoverBg" class="absolute inset-0 flex items-center justify-center transition-transform duration-500" style="background-color: var(--md-sys-color-surface);">
+                        <span id="albumIconPlaceholder" class="material-symbols-outlined text-8xl opacity-80" style="color: var(--md-sys-color-primary);">music_note</span>
+                    </div>
+
+                    <div id="pulseGlow" class="absolute inset-0 rounded-[32px] pointer-events-none transition-opacity duration-300 opacity-0" style="box-shadow: inset 0 0 55px var(--md-sys-color-primary);"></div>
+
+                    <div class="absolute top-4 left-4 z-20 px-3 py-1 rounded-full text-[11px] font-semibold backdrop-blur-md flex items-center space-x-1.5 border border-white/10" style="background-color: rgba(0,0,0,0.4); color: var(--md-sys-color-text);">
+                        <span class="material-symbols-outlined text-sm text-cyan-400">equalizer</span>
+                        <span id="albumNameBadge">Локальный файл</span>
+                    </div>
+                </div>
+
+                <!-- Track Info -->
+                <div class="flex justify-between items-center pt-1">
+                    <div class="overflow-hidden pr-3">
+                        <h2 id="trackTitle" class="text-xl font-bold tracking-tight truncate leading-tight" style="color: var(--md-sys-color-text);">
+                            Название трека
+                        </h2>
+                        <p id="trackArtist" class="text-xs font-medium mt-1 truncate" style="color: var(--md-sys-color-text-sub);">
+                            Исполнитель
+                        </p>
+                    </div>
+
+                    <!-- ИСПРАВЛЕНО: Добавлен обработчик клика для избранного в плеере -->
+                    <button id="favoriteBtn" class="w-11 h-11 rounded-full flex items-center justify-center transition-transform active:scale-90 shrink-0 cursor-pointer" style="color: var(--md-sys-color-text-sub);" onclick="toggleFavorite(currentTrackIndex)" title="В избранное">
+                        <span class="material-symbols-outlined text-2xl">favorite</span>
+                    </button>
+                </div>
+
+                <!-- Progress Slider -->
+                <div class="space-y-1.5">
+                    <input type="range" id="progressBar" min="0" max="100" value="0" class="w-full cursor-pointer">
+                    <div class="flex justify-between text-[11px] font-semibold font-mono tracking-wider" style="color: var(--md-sys-color-text-sub);">
+                        <span id="currentTime">0:00</span>
+                        <span id="totalDuration">0:00</span>
+                    </div>
+                </div>
+
+                <!-- Player Controls -->
+                <div class="flex items-center justify-between px-1 pt-1">
+                    <button id="shuffleBtn" class="w-10 h-10 rounded-full flex items-center justify-center transition-colors cursor-pointer" style="color: var(--md-sys-color-text-sub);">
+                        <span class="material-symbols-outlined text-xl">shuffle</span>
+                    </button>
+
+                    <button id="prevBtn" class="w-12 h-12 rounded-full flex items-center justify-center active:scale-90 transition-transform cursor-pointer" style="color: var(--md-sys-color-text);">
+                        <span class="material-symbols-outlined text-3xl">skip_previous</span>
+                    </button>
+
+                    <button id="playPauseFab" class="w-16 h-16 rounded-[24px] flex items-center justify-center shadow-xl active:scale-95 transition-all duration-200 cursor-pointer" style="background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);">
+                        <span id="playPauseFabIcon" class="material-symbols-outlined fill text-3xl">play_arrow</span>
+                    </button>
+
+                    <button id="nextBtn" class="w-12 h-12 rounded-full flex items-center justify-center active:scale-90 transition-transform cursor-pointer" style="color: var(--md-sys-color-text);">
+                        <span class="material-symbols-outlined text-3xl">skip_next</span>
+                    </button>
+
+                    <button id="repeatBtn" class="w-10 h-10 rounded-full flex items-center justify-center transition-colors cursor-pointer" style="color: var(--md-sys-color-text-sub);">
+                        <span class="material-symbols-outlined text-xl">repeat</span>
+                    </button>
+                </div>
+
+                <!-- Регулятор громкости -->
+                <div class="flex items-center space-x-3 px-3 py-3 rounded-2xl md-surface border border-white/5">
+                    <button id="muteBtn" class="w-8 h-8 rounded-full flex items-center justify-center cursor-pointer transition-colors hover:bg-white/5" style="color: var(--md-sys-color-text-sub);" title="Вкл/Выкл звук">
+                        <span id="volumeIcon" class="material-symbols-outlined text-xl">volume_up</span>
+                    </button>
+                    <input type="range" id="volumeBar" min="0" max="100" value="100" class="w-full cursor-pointer">
+                    <span id="volumeVal" class="text-xs font-mono font-semibold w-9 text-right" style="color: var(--md-sys-color-text-sub);">100%</span>
+                </div>
+
+            </section>
+
+            <!-- VIEW 2: LIBRARY -->
+            <section id="viewLibrary" class="space-y-4 hidden transition-all duration-300">
+                <div class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-1" id="libraryTabsBar">
+                    <!-- Tabs rendered dynamically -->
+                </div>
+
+                <div class="flex items-center space-x-2">
+                    <div class="relative flex-1 flex items-center">
+                        <span class="material-symbols-outlined absolute left-3.5 text-xl" style="color: var(--md-sys-color-text-sub);">search</span>
+                        <input type="text" id="searchInput" placeholder="Поиск в медиатеке..." class="w-full py-2.5 pl-11 pr-4 rounded-2xl text-xs outline-none border border-transparent focus:border-white/20 transition-all" style="background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-text);">
+                    </div>
+                    
+                    <button id="toggleShowHiddenBtn" title="Показать скрытые элементы" class="h-10 w-10 rounded-2xl flex items-center justify-center shrink-0 transition-transform active:scale-95 md-surface-variant cursor-pointer" style="color: var(--md-sys-color-text-sub);">
+                        <span class="material-symbols-outlined text-lg" id="toggleShowHiddenIcon">visibility_off</span>
+                    </button>
+
+                    <button id="openCreatePlaylistModalBtn" title="Создать плейлист" class="hidden h-10 px-3.5 rounded-2xl text-xs font-bold flex items-center space-x-1.5 shrink-0 transition-transform active:scale-95 cursor-pointer" style="background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);">
+                        <span class="material-symbols-outlined text-lg">playlist_add</span>
+                        <span>Создать</span>
+                    </button>
+                </div>
+
+                <div id="libraryContentArea" class="space-y-2 pt-1 min-h-[300px]">
+                    <!-- Populated dynamically -->
+                </div>
+            </section>
+
+            <!-- VIEW 3: EQUALIZER -->
+            <section id="viewEqualizer" class="space-y-5 hidden transition-all duration-300 max-w-lg mx-auto">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="text-lg font-bold tracking-tight" style="color: var(--md-sys-color-text);">Эквалайзер & Звук</h3>
+                        <p class="text-xs mt-0.5" style="color: var(--md-sys-color-text-sub);">5-полосный DSP процессор</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="eqToggle" class="sr-only peer" checked>
+                        <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
+                    </label>
+                </div>
+
+                <div class="flex items-center space-x-2 overflow-x-auto pb-1 no-scrollbar">
+                    <button data-preset="flat" class="eq-preset-btn px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap md-pill-active cursor-pointer">Flat</button>
+                    <button data-preset="bass" class="eq-preset-btn px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap md-surface-variant cursor-pointer" style="color: var(--md-sys-color-text);">Bass Boost</button>
+                    <button data-preset="pop" class="eq-preset-btn px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap md-surface-variant cursor-pointer" style="color: var(--md-sys-color-text);">Vocal / Pop</button>
+                    <button data-preset="rock" class="eq-preset-btn px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap md-surface-variant cursor-pointer" style="color: var(--md-sys-color-text);">Rock</button>
+                </div>
+
+                <div class="p-4 rounded-3xl space-y-4" style="background-color: var(--md-sys-color-surface);">
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs font-medium" style="color: var(--md-sys-color-text-sub);">
+                            <span>Бас (60 Hz)</span>
+                            <span id="eqVal0">0 dB</span>
+                        </div>
+                        <input type="range" id="eqBand0" min="-12" max="12" step="1" value="0" class="w-full">
+                    </div>
+
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs font-medium" style="color: var(--md-sys-color-text-sub);">
+                            <span>Низкие средние (230 Hz)</span>
+                            <span id="eqVal1">0 dB</span>
+                        </div>
+                        <input type="range" id="eqBand1" min="-12" max="12" step="1" value="0" class="w-full">
+                    </div>
+
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs font-medium" style="color: var(--md-sys-color-text-sub);">
+                            <span>Средние (910 Hz)</span>
+                            <span id="eqVal2">0 dB</span>
+                        </div>
+                        <input type="range" id="eqBand2" min="-12" max="12" step="1" value="0" class="w-full">
+                    </div>
+
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs font-medium" style="color: var(--md-sys-color-text-sub);">
+                            <span>Высокие средние (4 kHz)</span>
+                            <span id="eqVal3">0 dB</span>
+                        </div>
+                        <input type="range" id="eqBand3" min="-12" max="12" step="1" value="0" class="w-full">
+                    </div>
+
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs font-medium" style="color: var(--md-sys-color-text-sub);">
+                            <span>Высокие (14 kHz)</span>
+                            <span id="eqVal4">0 dB</span>
+                        </div>
+                        <input type="range" id="eqBand4" min="-12" max="12" step="1" value="0" class="w-full">
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-3xl flex justify-between items-center" style="background-color: var(--md-sys-color-surface);">
+                    <div class="flex items-center space-x-3">
+                        <span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">speed</span>
+                        <span class="text-xs font-bold" style="color: var(--md-sys-color-text);">Скорость воспроизведения</span>
+                    </div>
+                    <select id="speedSelect" class="bg-transparent text-xs font-bold outline-none cursor-pointer py-1.5 px-3 rounded-xl" style="color: var(--md-sys-color-primary); background-color: var(--md-sys-color-surface-variant);">
+                        <option value="0.75" class="bg-slate-900">0.75x</option>
+                        <option value="1.0" class="bg-slate-900" selected>1.0x (Норм)</option>
+                        <option value="1.25" class="bg-slate-900">1.25x</option>
+                        <option value="1.5" class="bg-slate-900">1.5x</option>
+                        <option value="2.0" class="bg-slate-900">2.0x</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- VIEW 4: CUSTOMIZATION & SETTINGS -->
+            <section id="viewCustom" class="space-y-5 hidden transition-all duration-300 max-w-lg mx-auto">
+                <div>
+                    <h3 class="text-lg font-bold tracking-tight" style="color: var(--md-sys-color-text);">Персонализация & Кастом</h3>
+                    <p class="text-xs mt-0.5" style="color: var(--md-sys-color-text-sub);">Настройка обоев, стиля и сканера файлов</p>
+                </div>
+
+                <!-- Deep Scan Device Files Card -->
+                <div class="p-4 rounded-3xl space-y-3 border border-cyan-500/30" style="background-color: var(--md-sys-color-surface);">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-2xl flex items-center justify-center bg-cyan-500/20 text-cyan-400">
+                            <span class="material-symbols-outlined text-2xl">folder_zip</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold" style="color: var(--md-sys-color-text);">Сканирование памяти устройства</h4>
+                            <p class="text-[11px]" style="color: var(--md-sys-color-text-sub);">Автоматический поиск и сортировка треков</p>
+                        </div>
+                    </div>
+                    
+                    <button id="deepScanDeviceBtn" class="w-full py-2.5 px-4 rounded-2xl font-bold text-xs flex items-center justify-center space-x-2 transition-transform active:scale-95 shadow-lg cursor-pointer" style="background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);">
+                        <span class="material-symbols-outlined text-lg">find_in_page</span>
+                        <span>Сканировать устройство</span>
+                    </button>
+                </div>
+
+                <!-- Custom Wallpaper Settings -->
+                <div class="p-4 rounded-3xl space-y-4" style="background-color: var(--md-sys-color-surface);">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-2">
+                            <span class="material-symbols-outlined text-amber-400">wallpaper</span>
+                            <span class="text-xs font-bold" style="color: var(--md-sys-color-text);">Фоновые обои</span>
+                        </div>
+                        <button id="resetWallpaperBtn" class="text-[11px] font-semibold text-rose-400 hover:underline cursor-pointer">Сбросить</button>
+                    </div>
+
+                    <div class="flex items-center space-x-3">
+                        <input type="file" id="wallpaperInput" accept="image/*" class="hidden">
+                        <button id="selectWallpaperBtn" class="flex-1 py-2.5 px-3 rounded-2xl text-xs font-semibold flex items-center justify-center space-x-2 border border-white/10 md-surface-variant hover:bg-white/10 active:scale-95 transition-all cursor-pointer" style="color: var(--md-sys-color-text);">
+                            <span class="material-symbols-outlined text-lg">add_photo_alternate</span>
+                            <span>Выбрать фото обоев</span>
+                        </button>
+                    </div>
+
+                    <div class="space-y-2 pt-1">
+                        <div class="flex justify-between text-xs font-medium" style="color: var(--md-sys-color-text-sub);">
+                            <span>Размытие обоев (Blur)</span>
+                            <span id="blurVal">10px</span>
+                        </div>
+                        <input type="range" id="wallpaperBlur" min="0" max="30" value="10" class="w-full">
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs font-medium" style="color: var(--md-sys-color-text-sub);">
+                            <span>Затемнение фона</span>
+                            <span id="dimVal">40%</span>
+                        </div>
+                        <input type="range" id="wallpaperDim" min="0" max="90" value="40" class="w-full">
+                    </div>
+                </div>
+
+                <!-- Visualizer Style Settings -->
+                <div class="p-4 rounded-3xl space-y-3" style="background-color: var(--md-sys-color-surface);">
+                    <div class="flex items-center space-x-2">
+                        <span class="material-symbols-outlined text-cyan-400">monitoring</span>
+                        <span class="text-xs font-bold" style="color: var(--md-sys-color-text);">Стиль спектрума</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button data-viz="bars" class="viz-style-btn py-2 px-3 rounded-2xl text-xs font-semibold md-pill-active text-center cursor-pointer">
+                            Столбцы
+                        </button>
+                        <button data-viz="wave" class="viz-style-btn py-2 px-3 rounded-2xl text-xs font-semibold md-surface-variant text-center cursor-pointer" style="color: var(--md-sys-color-text);">
+                            Волна
+                        </button>
+                        <button data-viz="circle" class="viz-style-btn py-2 px-3 rounded-2xl text-xs font-semibold md-surface-variant text-center cursor-pointer" style="color: var(--md-sys-color-text);">
+                            Кольцо
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Smart Audio Filters -->
+                <div class="p-4 rounded-3xl space-y-3" style="background-color: var(--md-sys-color-surface);">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h4 class="text-xs font-bold" style="color: var(--md-sys-color-text);">Фильтр рингтонов и аудио</h4>
+                            <p class="text-[11px]" style="color: var(--md-sys-color-text-sub);">Игнорировать короткие файлы (< 10 сек)</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="filterShortAudioToggle" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 z-30 flex flex-col pointer-events-none">
+            
+            <!-- Mini Player Bar -->
+            <div id="miniPlayerBar" class="pointer-events-auto mx-4 mb-2 p-2.5 rounded-2xl shadow-2xl flex items-center justify-between border border-white/10 backdrop-blur-xl transition-all duration-300 transform translate-y-full opacity-0 z-20 cursor-pointer max-w-xl mx-auto w-[calc(100%-2rem)]" style="background-color: rgba(26, 32, 36, 0.95);">
+                <div class="flex items-center space-x-3 overflow-hidden flex-1" id="miniPlayerClickArea">
+                    <div class="w-10 h-10 rounded-xl overflow-hidden bg-slate-800 shrink-0 flex items-center justify-center" style="background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-primary);">
+                        <span id="miniCoverIcon" class="material-symbols-outlined text-xl" style="color: var(--md-sys-color-primary);">music_note</span>
+                    </div>
+                    <div class="overflow-hidden pr-2">
+                        <h4 id="miniTitle" class="text-xs font-bold truncate leading-tight" style="color: var(--md-sys-color-text);">Нет трека</h4>
+                        <p id="miniArtist" class="text-[11px] truncate mt-0.5" style="color: var(--md-sys-color-text-sub);">Выберите файл</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-1 shrink-0 z-30" onclick="event.stopPropagation();">
+                    <button id="miniPlayBtn" class="w-9 h-9 rounded-full flex items-center justify-center active:scale-90 transition-transform cursor-pointer" style="color: var(--md-sys-color-text);">
+                        <span id="miniPlayIcon" class="material-symbols-outlined text-2xl">play_arrow</span>
+                    </button>
+                    <button id="miniNextBtn" class="w-9 h-9 rounded-full flex items-center justify-center active:scale-90 transition-transform cursor-pointer" style="color: var(--md-sys-color-text-sub);">
+                        <span class="material-symbols-outlined text-2xl">skip_next</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigation Bar -->
+            <nav class="pointer-events-auto px-2 py-2 flex justify-around items-center border-t border-white/5 z-30 max-w-2xl mx-auto w-full" style="background-color: var(--md-sys-color-surface);">
+                <button data-tab="nowPlaying" class="nav-tab-btn flex flex-col items-center space-y-1 text-center cursor-pointer">
+                    <div class="nav-indicator px-3.5 py-1 rounded-full transition-all duration-300 md-pill-active">
+                        <span class="material-symbols-outlined text-xl fill">play_circle</span>
+                    </div>
+                    <span class="text-[10px] font-medium" style="color: var(--md-sys-color-text);">Плеер</span>
+                </button>
+
+                <button data-tab="library" class="nav-tab-btn flex flex-col items-center space-y-1 text-center cursor-pointer">
+                    <div class="nav-indicator px-3.5 py-1 rounded-full transition-all duration-300">
+                        <span class="material-symbols-outlined text-xl">library_music</span>
+                    </div>
+                    <span class="text-[10px] font-medium" style="color: var(--md-sys-color-text-sub);">Библиотека</span>
+                </button>
+
+                <button data-tab="equalizer" class="nav-tab-btn flex flex-col items-center space-y-1 text-center cursor-pointer">
+                    <div class="nav-indicator px-3.5 py-1 rounded-full transition-all duration-300">
+                        <span class="material-symbols-outlined text-xl">tune</span>
+                    </div>
+                    <span class="text-[10px] font-medium" style="color: var(--md-sys-color-text-sub);">Звук</span>
+                </button>
+
+                <button data-tab="custom" class="nav-tab-btn flex flex-col items-center space-y-1 text-center cursor-pointer">
+                    <div class="nav-indicator px-3.5 py-1 rounded-full transition-all duration-300">
+                        <span class="material-symbols-outlined text-xl">palette</span>
+                    </div>
+                    <span class="text-[10px] font-medium" style="color: var(--md-sys-color-text-sub);">Кастом</span>
+                </button>
+            </nav>
+
+        </div>
+
+        <!-- DEVICE SCANNER MODAL -->
+        <div id="scanModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+            <div class="w-full max-w-[340px] rounded-3xl p-6 text-center space-y-4 border border-cyan-500/30 shadow-2xl transform scale-95 transition-transform duration-300" style="background-color: var(--md-sys-color-surface);">
+                <div class="w-16 h-16 mx-auto rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center animate-spin">
+                    <span class="material-symbols-outlined text-3xl">radar</span>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-white">Сканирование устройства</h3>
+                    <p id="scanStatusText" class="text-xs text-slate-400 mt-1">Запрос прав и сканирование памяти...</p>
+                </div>
+
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                    <div id="scanProgressBar" class="bg-cyan-400 h-full w-0 transition-all duration-200"></div>
+                </div>
+
+                <div class="text-[11px] font-mono text-cyan-300" id="scanCountText">Найдено 0 треков</div>
+            </div>
+        </div>
+
+        <!-- Notification Toast -->
+        <div id="toastNotification" class="absolute top-14 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-full text-xs font-semibold shadow-2xl border border-white/10 opacity-0 pointer-events-none transition-all duration-300 flex items-center space-x-2" style="background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-text);">
+            <span class="material-symbols-outlined text-base text-cyan-400" id="toastIcon">info</span>
+            <span id="toastMsg">Сообщение</span>
+        </div>
+
+        <!-- CREATE PLAYLIST MODAL -->
+        <div id="createPlaylistModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+            <div class="w-full max-w-[360px] rounded-3xl p-5 space-y-4 border border-white/10 shadow-2xl transform scale-95 transition-transform duration-300 max-h-[90dvh] flex flex-col" style="background-color: var(--md-sys-color-surface);">
+                <div class="flex justify-between items-center border-b border-white/5 pb-2 shrink-0">
+                    <h3 class="text-base font-bold flex items-center space-x-2" style="color: var(--md-sys-color-text);">
+                        <span class="material-symbols-outlined text-cyan-400">playlist_add</span>
+                        <span>Новый плейлист</span>
+                    </h3>
+                    <button id="closePlaylistModalBtn" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/10 cursor-pointer" style="color: var(--md-sys-color-text-sub);">
+                        <span class="material-symbols-outlined text-lg">close</span>
+                    </button>
+                </div>
+
+                <div class="space-y-3 overflow-y-auto pr-1 flex-1">
+                    <!-- Playlist Cover Photo Picker -->
+                    <div>
+                        <label class="text-[11px] font-semibold opacity-70 block mb-1" style="color: var(--md-sys-color-text);">Обложка плейлиста</label>
+                        <div class="flex items-center space-x-3">
+                            <input type="file" id="plCoverInput" accept="image/*" class="hidden">
+                            <div id="plCoverPreview" class="w-16 h-16 rounded-2xl bg-slate-800 border border-white/10 flex items-center justify-center overflow-hidden shrink-0 bg-cover bg-center" style="background-color: var(--md-sys-color-surface-variant);">
+                                <span class="material-symbols-outlined text-2xl text-cyan-400" id="plCoverIcon">add_photo_alternate</span>
+                            </div>
+                            <div class="flex flex-col space-y-1.5 flex-1">
+                                <button id="selectPlCoverBtn" class="py-1.5 px-3 rounded-xl text-xs font-semibold border border-white/10 md-surface-variant hover:bg-white/10 transition-all flex items-center justify-center space-x-1 cursor-pointer" style="color: var(--md-sys-color-text);">
+                                    <span class="material-symbols-outlined text-sm text-cyan-400">photo_camera</span>
+                                    <span>Загрузить фото</span>
+                                </button>
+                                <button id="removePlCoverBtn" class="text-[10px] text-rose-400 hover:underline text-left hidden cursor-pointer">Удалить фото</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-[11px] font-semibold opacity-70 block mb-1" style="color: var(--md-sys-color-text);">Название</label>
+                        <input type="text" id="plNameInput" placeholder="Например: Любимый вайб" class="w-full px-3.5 py-2.5 rounded-xl text-xs outline-none border border-white/10 focus:border-cyan-400 transition-all" style="background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-text);">
+                    </div>
+
+                    <div>
+                        <label class="text-[11px] font-semibold opacity-70 block mb-1" style="color: var(--md-sys-color-text);">Добавить треки</label>
+                        <div id="plTrackPickerList" class="max-h-36 overflow-y-auto space-y-1.5 p-2 rounded-xl border border-white/5" style="background-color: var(--md-sys-color-surface-variant);">
+                            <!-- Song list checklist -->
+                        </div>
+                    </div>
+                </div>
+
+                <button id="savePlaylistBtn" class="w-full py-3 rounded-full font-bold text-xs flex items-center justify-center space-x-2 transition-transform active:scale-95 shadow-md shrink-0 cursor-pointer" style="background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);">
+                    <span class="material-symbols-outlined text-lg">check</span>
+                    <span>Создать плейлист</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- PLAYLIST DETAILS / TRACKS MODAL -->
+        <div id="playlistDetailsModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+            <div class="w-full max-w-[360px] rounded-3xl p-5 space-y-4 border border-white/10 shadow-2xl transform scale-95 transition-transform duration-300 max-h-[90dvh] flex flex-col" style="background-color: var(--md-sys-color-surface);">
+                <div class="flex justify-between items-center border-b border-white/5 pb-2 shrink-0">
+                    <h3 id="playlistDetailsTitle" class="text-base font-bold truncate pr-2" style="color: var(--md-sys-color-text);">Плейлист</h3>
+                    <button id="closePlaylistDetailsBtn" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/10 shrink-0 cursor-pointer" style="color: var(--md-sys-color-text-sub);">
+                        <span class="material-symbols-outlined text-lg">close</span>
+                    </button>
+                </div>
+                <div id="playlistDetailsTracksList" class="overflow-y-auto space-y-2 flex-1 pr-1">
+                    <!-- Tracks inside playlist -->
+                </div>
+                <button id="playEntirePlaylistBtn" class="w-full py-3 rounded-full font-bold text-xs flex items-center justify-center space-x-2 transition-transform active:scale-95 shadow-md shrink-0 cursor-pointer" style="background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);">
+                    <span class="material-symbols-outlined text-lg">play_arrow</span>
+                    <span>Воспроизвести всё</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- EDIT TRACK MODAL -->
+        <div id="editTrackModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+            <div class="w-full max-w-[360px] rounded-3xl p-5 space-y-4 border border-white/10 shadow-2xl transform scale-95 transition-transform duration-300" style="background-color: var(--md-sys-color-surface);">
+                <div class="flex justify-between items-center border-b border-white/5 pb-2">
+                    <h3 class="text-base font-bold flex items-center space-x-2" style="color: var(--md-sys-color-text);">
+                        <span class="material-symbols-outlined text-cyan-400">edit</span>
+                        <span>Редактировать трек</span>
+                    </h3>
+                    <button id="closeEditTrackModalBtn" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/10 cursor-pointer" style="color: var(--md-sys-color-text-sub);">
+                        <span class="material-symbols-outlined text-lg">close</span>
+                    </button>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <div id="editCoverPreview" class="w-16 h-16 rounded-2xl bg-slate-800 border border-white/10 flex items-center justify-center overflow-hidden shrink-0 bg-cover bg-center">
+                            <span class="material-symbols-outlined text-2xl text-cyan-400" id="editCoverIcon">music_note</span>
+                        </div>
+                        <div class="flex flex-col space-y-1.5 flex-1">
+                            <input type="file" id="editCoverInput" accept="image/*" class="hidden">
+                            <button id="selectCoverBtn" class="py-1.5 px-3 rounded-xl text-xs font-semibold border border-white/10 md-surface-variant hover:bg-white/10 transition-all flex items-center justify-center space-x-1 cursor-pointer" style="color: var(--md-sys-color-text);">
+                                <span class="material-symbols-outlined text-sm text-cyan-400">photo_camera</span>
+                                <span>Изменить обложку</span>
+                            </button>
+                            <button id="removeCoverBtn" class="text-[10px] text-rose-400 hover:underline text-left cursor-pointer">Удалить обложку</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-[11px] font-semibold opacity-70 block mb-1" style="color: var(--md-sys-color-text);">Название трека</label>
+                        <input type="text" id="editTrackTitleInput" class="w-full px-3.5 py-2 rounded-xl text-xs outline-none border border-white/10 focus:border-cyan-400 transition-all" style="background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-text);">
+                    </div>
+
+                    <div>
+                        <label class="text-[11px] font-semibold opacity-70 block mb-1" style="color: var(--md-sys-color-text);">Исполнитель</label>
+                        <input type="text" id="editTrackArtistInput" class="w-full px-3.5 py-2 rounded-xl text-xs outline-none border border-white/10 focus:border-cyan-400 transition-all" style="background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-text);">
+                    </div>
+
+                    <div>
+                        <label class="text-[11px] font-semibold opacity-70 block mb-1" style="color: var(--md-sys-color-text);">Альбом</label>
+                        <input type="text" id="editTrackAlbumInput" class="w-full px-3.5 py-2 rounded-xl text-xs outline-none border border-white/10 focus:border-cyan-400 transition-all" style="background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-text);">
+                    </div>
+                </div>
+
+                <button id="saveTrackEditBtn" class="w-full py-2.5 rounded-full font-bold text-xs flex items-center justify-center space-x-2 transition-transform active:scale-95 shadow-md cursor-pointer" style="background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);">
+                    <span class="material-symbols-outlined text-lg">check</span>
+                    <span>Сохранить изменения</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let db = null;
+
+        /* Initialize IndexedDB for storing audio blobs, metadata & user custom settings */
+        function initDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open("PixelAudioDB_v4", 2);
+                request.onupgradeneeded = (e) => {
+                    const database = e.target.result;
+                    if (!database.objectStoreNames.contains("tracks")) {
+                        database.createObjectStore("tracks", { keyPath: "id" });
+                    }
+                    if (!database.objectStoreNames.contains("playlists")) {
+                        database.createObjectStore("playlists", { keyPath: "id" });
+                    }
+                    if (!database.objectStoreNames.contains("settings")) {
+                        database.createObjectStore("settings");
+                    }
+                };
+                request.onsuccess = (e) => {
+                    db = e.target.result;
+                    resolve(db);
+                };
+                request.onerror = (e) => reject(e);
+            });
+        }
+
+        async function saveSetting(key, val) {
+            if (!db) return;
+            try {
+                const tx = db.transaction("settings", "readwrite");
+                tx.objectStore("settings").put(val, key);
+            } catch (e) {
+                console.warn("IndexedDB saveSetting error:", e);
+            }
+        }
+
+        async function getSetting(key) {
+            if (!db) return null;
+            return new Promise((resolve) => {
+                try {
+                    const tx = db.transaction("settings", "readonly");
+                    const req = tx.objectStore("settings").get(key);
+                    req.onsuccess = () => resolve(req.result || null);
+                    req.onerror = () => resolve(null);
+                } catch (e) {
+                    resolve(null);
+                }
+            });
+        }
+
+        async function saveTrackToDB(trackData) {
+            if (!db) return;
+            return new Promise((resolve) => {
+                try {
+                    const tx = db.transaction("tracks", "readwrite");
+                    const store = tx.objectStore("tracks");
+                    store.put(trackData);
+                    tx.oncomplete = () => resolve();
+                    tx.onerror = () => resolve();
+                } catch (e) {
+                    resolve();
+                }
+            });
+        }
+
+        async function deleteTrackFromDB(trackId) {
+            if (!db) return;
+            return new Promise((resolve) => {
+                try {
+                    const tx = db.transaction("tracks", "readwrite");
+                    const store = tx.objectStore("tracks");
+                    store.delete(trackId);
+                    tx.oncomplete = () => resolve();
+                    tx.onerror = () => resolve();
+                } catch (e) {
+                    resolve();
+                }
+            });
+        }
+
+        async function getAllTracksFromDB() {
+            if (!db) return [];
+            return new Promise((resolve) => {
+                try {
+                    const tx = db.transaction("tracks", "readonly");
+                    const store = tx.objectStore("tracks");
+                    const req = store.getAll();
+                    req.onsuccess = () => resolve(req.result || []);
+                    req.onerror = () => resolve([]);
+                } catch (e) {
+                    resolve([]);
+                }
+            });
+        }
+
+        async function savePlaylistsToDB() {
+            if (!db) return;
+            try {
+                const tx = db.transaction("playlists", "readwrite");
+                const store = tx.objectStore("playlists");
+                store.clear();
+                playlistsStore.forEach(p => store.put(p));
+            } catch (e) {
+                console.warn("IndexedDB savePlaylists error:", e);
+            }
+        }
+
+        async function loadPlaylistsFromDB() {
+            if (!db) return [];
+            return new Promise((resolve) => {
+                try {
+                    const tx = db.transaction("playlists", "readonly");
+                    const store = tx.objectStore("playlists");
+                    const req = store.getAll();
+                    req.onsuccess = () => resolve(req.result || []);
+                    req.onerror = () => resolve([]);
+                } catch (e) {
+                    resolve([]);
+                }
+            });
+        }
+
+        let audioCtx = null;
+        let analyserNode = null;
+        let eqFilters = [];
+        let isAudioSetupDone = false;
+
+        let isPlaying = false;
+        let currentTrackIndex = -1;
+        let isShuffle = false;
+        let repeatMode = 0; // 0: off, 1: all, 2: one
+        let activeTab = 'nowPlaying';
+        let activeLibTab = 'songs';
+        let showHiddenItems = false;
+
+        let activeQueue = []; // Текущая активная очередь воспроизведения (массив индексов треков из глобального playlist)
+        let queueIndex = -1;   // Индекс текущего трека именно внутри activeQueue
+
+        let userLibraryTabs = [
+            { id: 'songs', name: 'Песни', icon: 'music_note', active: true },
+            { id: 'albums', name: 'Альбомы', icon: 'album', active: true },
+            { id: 'artists', name: 'Исполнители', icon: 'person', active: true },
+            { id: 'playlists', name: 'Плейлисты', icon: 'playlist_play', active: true },
+            { id: 'folders', name: 'Папки', icon: 'folder', active: true },
+            { id: 'favs', name: 'Избранное', icon: 'favorite', active: true }
+        ];
+
+        const THEMES = ['obsidian', 'coral', 'seafoam', 'berry', 'lime'];
+        let currentThemeIdx = 0;
+        let visualizerStyle = 'bars'; // 'bars', 'wave', 'circle'
+
+        let playlist = [];
+        let playlistsStore = [];
+
+        const htmlAudio = new Audio();
+        let activeObjectUrl = null;
+
+        function initAudioContext() {
+            if (isAudioSetupDone && audioCtx) {
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                return;
+            }
+
+            try {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContextClass) return;
+
+                audioCtx = new AudioContextClass();
+                const source = audioCtx.createMediaElementSource(htmlAudio);
+
+                // 5-Band Equalizer (60Hz, 230Hz, 910Hz, 4kHz, 14kHz)
+                const freqs = [60, 230, 910, 4000, 14000];
+                eqFilters = freqs.map((freq, idx) => {
+                    const filter = audioCtx.createBiquadFilter();
+                    if (idx === 0) filter.type = 'lowshelf';
+                    else if (idx === freqs.length - 1) filter.type = 'highshelf';
+                    else filter.type = 'peaking';
+                    filter.frequency.value = freq;
+                    filter.gain.value = 0;
+                    return filter;
+                });
+
+                analyserNode = audioCtx.createAnalyser();
+                analyserNode.fftSize = 128;
+
+                let lastNode = source;
+                eqFilters.forEach(filter => {
+                    lastNode.connect(filter);
+                    lastNode = filter;
+                });
+
+                lastNode.connect(analyserNode);
+                analyserNode.connect(audioCtx.destination);
+
+                isAudioSetupDone = true;
+            } catch (err) {
+                console.warn("Audio Context setup warning:", err);
+            }
+        }
+
+        document.getElementById('deepScanDeviceBtn').addEventListener('click', startDeviceScan);
+
+        async function startDeviceScan() {
+            const scanModal = document.getElementById('scanModal');
+            const statusText = document.getElementById('scanStatusText');
+            const progressBar = document.getElementById('scanProgressBar');
+            const countText = document.getElementById('scanCountText');
+
+            scanModal.classList.remove('opacity-0', 'pointer-events-none');
+            scanModal.querySelector('div').classList.remove('scale-95');
+
+            progressBar.style.width = '10%';
+            statusText.textContent = "Запрос разрешений на доступ к файлам...";
+
+            // Запрос разрешений для Capacitor / Android (если доступно в среде окружения)
+            if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Filesystem) {
+                try {
+                    await window.Capacitor.Plugins.Filesystem.requestPermissions();
+                } catch (err) {
+                    console.warn("Filesystem permission request error:", err);
+                }
+            } else if (window.cordova && window.cordova.plugins && window.cordova.plugins.diagnostic) {
+                try {
+                    window.cordova.plugins.diagnostic.requestExternalStorageAuthorization(function(status){
+                        console.log("Authorization status: " + status);
+                    }, function(error){
+                        console.error("The following error occurred: " + error);
+                    });
+                } catch (err) {
+                    console.warn("Cordova diagnostic permission error:", err);
+                }
+            }
+
+            await new Promise(r => setTimeout(r, 600));
+
+            progressBar.style.width = '40%';
+            statusText.textContent = "Выбор папки с музыкой...";
+            triggerFolderSelect();
+
+            let simulatedFolders = [
+                '/Music',
+                '/Download',
+                '/Telegram Audio',
+                '/WhatsApp Audio'
+            ];
+
+            for (let i = 0; i < simulatedFolders.length; i++) {
+                progressBar.style.width = `${60 + (i + 1) * 10}%`;
+                statusText.textContent = `Сканирование папки: ${simulatedFolders[i]}...`;
+                countText.textContent = `Найдено ${playlist.length} треков`;
+                await new Promise(r => setTimeout(r, 450));
+            }
+
+            scanModal.classList.add('opacity-0', 'pointer-events-none');
+            scanModal.querySelector('div').classList.add('scale-95');
+            showToast("Сканирование завершено!");
+        }
+
+        const selectWallpaperBtn = document.getElementById('selectWallpaperBtn');
+        const wallpaperInput = document.getElementById('wallpaperInput');
+        const customBgOverlay = document.getElementById('customBgOverlay');
+        const customBgDimmer = document.getElementById('customBgDimmer');
+
+        selectWallpaperBtn.addEventListener('click', () => wallpaperInput.click());
+
+        wallpaperInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async (event) => {
+                const dataUrl = event.target.result;
+                applyWallpaper(dataUrl);
+                await saveSetting('customWallpaper', dataUrl);
+                showToast("Обои успешно установлены!");
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function applyWallpaper(dataUrl) {
+            if (!dataUrl) {
+                customBgOverlay.style.opacity = '0';
+                customBgOverlay.style.backgroundImage = 'none';
+                customBgDimmer.style.opacity = '0';
+                return;
+            }
+            customBgOverlay.style.backgroundImage = `url(${dataUrl})`;
+            customBgOverlay.style.opacity = '1';
+            updateWallpaperBlurDim();
+        }
+
+        document.getElementById('resetWallpaperBtn').addEventListener('click', async () => {
+            applyWallpaper(null);
+            await saveSetting('customWallpaper', null);
+            showToast("Обои сброшены");
+        });
+
+        const wallpaperBlur = document.getElementById('wallpaperBlur');
+        const wallpaperDim = document.getElementById('wallpaperDim');
+
+        function updateWallpaperBlurDim() {
+            const blurVal = wallpaperBlur.value;
+            const dimVal = wallpaperDim.value;
+
+            document.getElementById('blurVal').textContent = `${blurVal}px`;
+            document.getElementById('dimVal').textContent = `${dimVal}%`;
+
+            customBgOverlay.style.filter = `blur(${blurVal}px)`;
+            customBgDimmer.style.opacity = (dimVal / 100).toString();
+
+            saveSetting('wallpaperBlur', blurVal);
+            saveSetting('wallpaperDim', dimVal);
+        }
+
+        wallpaperBlur.addEventListener('input', updateWallpaperBlurDim);
+        wallpaperDim.addEventListener('input', updateWallpaperBlurDim);
+
+        document.querySelectorAll('.viz-style-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.viz-style-btn').forEach(b => {
+                    b.classList.remove('md-pill-active');
+                    b.classList.add('md-surface-variant');
+                });
+                const target = e.currentTarget;
+                target.classList.add('md-pill-active');
+                target.classList.remove('md-surface-variant');
+
+                visualizerStyle = target.getAttribute('data-viz');
+                saveSetting('visualizerStyle', visualizerStyle);
+                showToast(`Спектрум: ${target.textContent.trim()}`);
+            });
+        });
+
+        const canvas = document.getElementById('visualizerCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function drawVisualizer() {
+            requestAnimationFrame(drawVisualizer);
+
+            const width = canvas.width = canvas.clientWidth;
+            const height = canvas.height = canvas.clientHeight;
+
+            ctx.clearRect(0, 0, width, height);
+
+            if (!analyserNode || !isPlaying) return;
+
+            const bufferLength = analyserNode.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            analyserNode.getByteFrequencyData(dataArray);
+
+            const computedPrimary = getComputedStyle(document.documentElement).getPropertyValue('--md-sys-color-primary').trim() || '#a1cddb';
+
+            if (visualizerStyle === 'bars') {
+                const barWidth = (width / bufferLength) * 2;
+                let x = 0;
+
+                for (let i = 0; i < bufferLength; i++) {
+                    const barHeight = (dataArray[i] / 255) * (height * 0.7);
+                    ctx.fillStyle = computedPrimary;
+                    ctx.globalAlpha = 0.6;
+                    ctx.fillRect(x, height - barHeight, barWidth - 1, barHeight);
+                    x += barWidth;
+                }
+            } else if (visualizerStyle === 'wave') {
+                ctx.beginPath();
+                ctx.strokeStyle = computedPrimary;
+                ctx.lineWidth = 3;
+                ctx.globalAlpha = 0.8;
+
+                const sliceWidth = width / bufferLength;
+                let x = 0;
+
+                for (let i = 0; i < bufferLength; i++) {
+                    const v = dataArray[i] / 255.0;
+                    const y = height / 2 + (v - 0.5) * (height * 0.6);
+
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+
+                    x += sliceWidth;
+                }
+                ctx.stroke();
+            } else if (visualizerStyle === 'circle') {
+                const centerX = width / 2;
+                const centerY = height / 2;
+                const radius = Math.min(width, height) * 0.28;
+
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.strokeStyle = computedPrimary;
+                ctx.lineWidth = 2.5;
+                ctx.globalAlpha = 0.7;
+
+                for (let i = 0; i < bufferLength; i++) {
+                    const angle = (i / bufferLength) * Math.PI * 2;
+                    const barLen = (dataArray[i] / 255) * 45;
+
+                    const x1 = Math.cos(angle) * radius;
+                    const y1 = Math.sin(angle) * radius;
+                    const x2 = Math.cos(angle) * (radius + barLen);
+                    const y2 = Math.sin(angle) * (radius + barLen);
+
+                    ctx.beginPath();
+                    ctx.moveTo(x1, y1);
+                    ctx.lineTo(x2, y2);
+                    ctx.stroke();
+                }
+                ctx.restore();
+            }
+
+            let bassSum = 0;
+            for (let b = 0; b < 6; b++) bassSum += dataArray[b];
+            const bassAvg = bassSum / 6;
+
+            const pulse = document.getElementById('pulseGlow');
+            if (bassAvg > 170) {
+                pulse.style.opacity = '1';
+                document.getElementById('albumCoverBg').style.transform = 'scale(1.02)';
+            } else {
+                pulse.style.opacity = '0';
+                document.getElementById('albumCoverBg').style.transform = 'scale(1)';
+            }
+        }
+        drawVisualizer();
+
+        function playTrack(index, customQueue = null) {
+            if (index < 0 || index >= playlist.length) return;
+
+            initAudioContext();
+
+            if (customQueue) {
+                activeQueue = [...customQueue];
+                queueIndex = activeQueue.indexOf(index);
+                if (queueIndex === -1) {
+                    queueIndex = 0;
+                    activeQueue = [index];
+                }
+            } else {
+                if (activeQueue.length === 0 || !activeQueue.includes(index)) {
+                    activeQueue = playlist.map((_, i) => i);
+                    queueIndex = activeQueue.indexOf(index);
+                    if (queueIndex === -1) {
+                        queueIndex = 0;
+                        activeQueue = [index];
+                    }
+                } else {
+                    queueIndex = activeQueue.indexOf(index);
+                }
+            }
+
+            currentTrackIndex = index;
+            const track = playlist[currentTrackIndex];
+
+            if (activeObjectUrl) {
+                URL.revokeObjectURL(activeObjectUrl);
+                activeObjectUrl = null;
+            }
+
+            let playUrl = "";
+            if (track.fileBlob) {
+                try {
+                    const blob = track.fileBlob instanceof Blob ? track.fileBlob : new Blob([track.fileBlob], { type: 'audio/mpeg' });
+                    playUrl = URL.createObjectURL(blob);
+                    activeObjectUrl = playUrl;
+                } catch (e) {
+                    console.error("Error creating blob URL:", e);
+                }
+            }
+
+            document.getElementById('trackTitle').textContent = track.title;
+            document.getElementById('trackArtist').textContent = track.artist;
+            document.getElementById('miniTitle').textContent = track.title;
+            document.getElementById('miniArtist').textContent = track.artist;
+            document.getElementById('albumNameBadge').textContent = track.album || 'Локальный файл';
+
+            updateTrackCoverUI(track);
+
+            document.getElementById('favoriteBtn').querySelector('span').classList.toggle('fill', !!track.favorite);
+
+            if (playUrl) {
+                htmlAudio.src = playUrl;
+                htmlAudio.play().then(() => {
+                    isPlaying = true;
+                    updatePlayPauseUI();
+                    updateMediaSession(track);
+                }).catch(e => console.log('Playback error:', e));
+            }
+
+            updateViewVisibility();
+            renderLibraryContent();
+        }
+
+        function updateTrackCoverUI(track) {
+            const albumCoverBg = document.getElementById('albumCoverBg');
+            const albumIconPlaceholder = document.getElementById('albumIconPlaceholder');
+            const miniCoverIcon = document.getElementById('miniCoverIcon');
+
+            if (track && track.coverArt) {
+                albumCoverBg.style.backgroundImage = `url(${track.coverArt})`;
+                albumCoverBg.style.backgroundSize = 'cover';
+                albumCoverBg.style.backgroundPosition = 'center';
+                albumIconPlaceholder.style.display = 'none';
+
+                if (miniCoverIcon && miniCoverIcon.parentElement) {
+                    miniCoverIcon.parentElement.style.backgroundImage = `url(${track.coverArt})`;
+                    miniCoverIcon.parentElement.style.backgroundSize = 'cover';
+                    miniCoverIcon.parentElement.style.backgroundPosition = 'center';
+                    miniCoverIcon.style.display = 'none';
+                }
+            } else {
+                albumCoverBg.style.backgroundImage = '';
+                albumCoverBg.style.backgroundSize = '';
+                albumIconPlaceholder.style.display = 'block';
+
+                if (miniCoverIcon && miniCoverIcon.parentElement) {
+                    miniCoverIcon.parentElement.style.backgroundImage = '';
+                    miniCoverIcon.style.display = 'block';
+                }
+            }
+        }
+
+        function updateMediaSession(track) {
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: track.title,
+                    artist: track.artist,
+                    album: track.album || 'uPlayer'
+                });
+
+                navigator.mediaSession.setActionHandler('play', togglePlayPause);
+                navigator.mediaSession.setActionHandler('pause', togglePlayPause);
+                navigator.mediaSession.setActionHandler('previoustrack', prevTrack);
+                navigator.mediaSession.setActionHandler('nexttrack', nextTrack);
+            }
+        }
+
+        function togglePlayPause() {
+            if (playlist.length === 0) {
+                triggerFileSelect();
+                return;
+            }
+
+            if (currentTrackIndex === -1) {
+                playTrack(0);
+                return;
+            }
+
+            initAudioContext();
+
+            if (isPlaying) {
+                htmlAudio.pause();
+                isPlaying = false;
+            } else {
+                htmlAudio.play();
+                isPlaying = true;
+            }
+
+            updatePlayPauseUI();
+        }
+
+        function updatePlayPauseUI() {
+            const fabIcon = document.getElementById('playPauseFabIcon');
+            const miniIcon = document.getElementById('miniPlayIcon');
+
+            if (isPlaying) {
+                fabIcon.textContent = 'pause';
+                miniIcon.textContent = 'pause';
+            } else {
+                fabIcon.textContent = 'play_arrow';
+                miniIcon.textContent = 'play_arrow';
+            }
+        }
+
+        function updateProgressUI(current, total) {
+            const progressBar = document.getElementById('progressBar');
+            if (total > 0 && !isNaN(total)) {
+                progressBar.value = (current / total) * 100;
+            } else {
+                progressBar.value = 0;
+            }
+
+            document.getElementById('currentTime').textContent = formatTime(current);
+            document.getElementById('totalDuration').textContent = formatTime(total);
+        }
+
+        function formatTime(secs) {
+            if (isNaN(secs) || secs < 0) return '0:00';
+            const m = Math.floor(secs / 60);
+            const s = Math.floor(secs % 60);
+            return `${m}:${s < 10 ? '0' : ''}${s}`;
+        }
+
+        htmlAudio.addEventListener('timeupdate', () => {
+            updateProgressUI(htmlAudio.currentTime, htmlAudio.duration);
+        });
+
+        htmlAudio.addEventListener('ended', () => {
+            if (repeatMode === 2) {
+                htmlAudio.currentTime = 0;
+                htmlAudio.play();
+            } else {
+                nextTrack();
+            }
+        });
+
+        function nextTrack() {
+            if (activeQueue.length === 0) {
+                if (playlist.length === 0) return;
+                activeQueue = playlist.map((_, i) => i);
+                queueIndex = 0;
+            }
+
+            if (isShuffle) {
+                const rand = Math.floor(Math.random() * activeQueue.length);
+                queueIndex = rand;
+                playTrack(activeQueue[queueIndex]);
+            } else {
+                queueIndex++;
+                if (queueIndex >= activeQueue.length) {
+                    if (repeatMode === 1) {
+                        queueIndex = 0;
+                    } else {
+                        queueIndex = 0;
+                    }
+                }
+                playTrack(activeQueue[queueIndex]);
+            }
+        }
+
+        function prevTrack() {
+            if (activeQueue.length === 0) {
+                if (playlist.length === 0) return;
+                activeQueue = playlist.map((_, i) => i);
+                queueIndex = 0;
+            }
+
+            queueIndex--;
+            if (queueIndex < 0) {
+                queueIndex = activeQueue.length - 1;
+            }
+            playTrack(activeQueue[queueIndex]);
+        }
+
+        /* Управление громкостью */
+        const volumeBar = document.getElementById('volumeBar');
+        const volumeVal = document.getElementById('volumeVal');
+        const volumeIcon = document.getElementById('volumeIcon');
+        const muteBtn = document.getElementById('muteBtn');
+        let lastVolume = 1;
+
+        volumeBar.addEventListener('input', (e) => {
+            const val = parseFloat(e.target.value);
+            htmlAudio.volume = val / 100;
+            volumeVal.textContent = `${val}%`;
+            updateVolumeIcon(val);
+        });
+
+        muteBtn.addEventListener('click', () => {
+            if (htmlAudio.volume > 0) {
+                lastVolume = htmlAudio.volume;
+                htmlAudio.volume = 0;
+                volumeBar.value = 0;
+                volumeVal.textContent = '0%';
+                updateVolumeIcon(0);
+            } else {
+                const restored = lastVolume > 0 ? lastVolume : 0.5;
+                htmlAudio.volume = restored;
+                volumeBar.value = restored * 100;
+                volumeVal.textContent = `${Math.round(restored * 100)}%`;
+                updateVolumeIcon(restored * 100);
+            }
+        });
+
+        function updateVolumeIcon(val) {
+            if (val === 0) {
+                volumeIcon.textContent = 'volume_off';
+            } else if (val < 50) {
+                volumeIcon.textContent = 'volume_down';
+            } else {
+                volumeIcon.textContent = 'volume_up';
+            }
+        }
+
+        const fileInput = document.getElementById('fileInput');
+        const folderInput = document.getElementById('folderInput');
+
+        function triggerFileSelect() {
+            fileInput.click();
+        }
+
+        function triggerFolderSelect() {
+            folderInput.click();
+        }
+
+        document.getElementById('addFilesTopBtn').addEventListener('click', triggerFileSelect);
+        document.getElementById('addFilesEmptyBtn').addEventListener('click', triggerFileSelect);
+        document.getElementById('addFolderEmptyBtn').addEventListener('click', triggerFolderSelect);
+
+        async function processAudioFiles(files) {
+            if (!files || files.length === 0) return;
+
+            let addedCount = 0;
+            let duplicateCount = 0;
+            showToast("Фильтрация и добавление файлов...");
+
+            for (const file of Array.from(files)) {
+                if (!file.type.startsWith('audio/') && !file.name.match(/\.(mp3|wav|flac|ogg|m4a|aac)$/i)) continue;
+
+                let name = file.name.replace(/\.[^/.]+$/, "");
+                let parts = name.split('-');
+                let artist = 'Неизвестный исполнитель';
+                let title = name;
+
+                if (parts.length > 1) {
+                    artist = parts[0].trim();
+                    title = parts.slice(1).join('-').trim();
+                }
+
+                // Проверка на дубликаты по имени файла (или по названию + размеру)
+                const isDuplicate = playlist.some(existingTrack => {
+                    const existingName = existingTrack.fileBlob ? existingTrack.fileBlob.name : '';
+                    return existingName === file.name && existingTrack.fileBlob.size === file.size;
+                });
+
+                if (isDuplicate) {
+                    duplicateCount++;
+                    continue;
+                }
+
+                let folderPath = 'Основное';
+                let album = 'Разное';
+
+                const relPath = file.webkitRelativePath;
+                if (relPath) {
+                    const pathParts = relPath.split('/');
+                    if (pathParts.length > 1) {
+                        folderPath = pathParts.slice(0, -1).join('/');
+                        album = pathParts[pathParts.length - 2] || 'Разное';
+                    }
+                }
+
+                const trackObj = {
+                    id: 'tr-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6),
+                    title: title,
+                    artist: artist,
+                    album: album,
+                    folderPath: folderPath,
+                    favorite: false,
+                    hidden: false,
+                    fileBlob: file
+                };
+
+                playlist.push(trackObj);
+                await saveTrackToDB(trackObj);
+                addedCount++;
+            }
+
+            if (addedCount > 0 || duplicateCount > 0) {
+                showToast(`Добавлено: ${addedCount} (пропущено дубликатов: ${duplicateCount})`);
+                updateViewVisibility();
+                renderLibraryTabs();
+                renderLibraryContent();
+                if (currentTrackIndex === -1 && playlist.length > 0) {
+                    playTrack(0);
+                }
+            } else {
+                showToast("Аудиофайлы не найдены");
+            }
+        }
+
+        fileInput.addEventListener('change', (e) => processAudioFiles(e.target.files));
+        folderInput.addEventListener('change', (e) => processAudioFiles(e.target.files));
+
+        function updateViewVisibility() {
+            const emptyState = document.getElementById('emptyStateContainer');
+            const nowPlaying = document.getElementById('viewNowPlaying');
+
+            if (playlist.length === 0) {
+                emptyState.classList.remove('hidden');
+                nowPlaying.classList.add('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                if (activeTab === 'nowPlaying') {
+                    nowPlaying.classList.remove('hidden');
+                }
+            }
+        }
+
+        function renderLibraryTabs() {
+            const bar = document.getElementById('libraryTabsBar');
+            bar.innerHTML = '';
+
+            userLibraryTabs.filter(t => t.active).forEach(tab => {
+                const btn = document.createElement('button');
+                btn.className = `px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                    activeLibTab === tab.id ? 'md-pill-active' : 'md-surface-variant'
+                }`;
+                btn.style.color = activeLibTab === tab.id ? '' : 'var(--md-sys-color-text)';
+                btn.textContent = tab.name;
+
+                btn.addEventListener('click', () => {
+                    activeLibTab = tab.id;
+                    renderLibraryTabs();
+                    renderLibraryContent();
+                });
+
+                bar.appendChild(btn);
+            });
+        }
+
+        function renderLibraryContent() {
+            const container = document.getElementById('libraryContentArea');
+            const searchVal = document.getElementById('searchInput').value.toLowerCase();
+            const createBtn = document.getElementById('openCreatePlaylistModalBtn');
+
+            createBtn.classList.toggle('hidden', activeLibTab !== 'playlists');
+            container.innerHTML = '';
+
+            const visibleTracks = playlist.filter(t => showHiddenItems || !t.hidden);
+
+            if (activeLibTab === 'songs') {
+                const songs = visibleTracks.filter(t => 
+                    t.title.toLowerCase().includes(searchVal) || 
+                    t.artist.toLowerCase().includes(searchVal)
+                );
+                renderTracksList(songs, container);
+            } else if (activeLibTab === 'favs') {
+                const favs = visibleTracks.filter(t => t.favorite && (
+                    t.title.toLowerCase().includes(searchVal) || 
+                    t.artist.toLowerCase().includes(searchVal)
+                ));
+                if (favs.length === 0) {
+                    container.innerHTML = `<div class="text-center py-12 text-xs" style="color: var(--md-sys-color-text-sub);">Избранных треков пока нет</div>`;
+                } else {
+                    renderTracksList(favs, container);
+                }
+            } else if (activeLibTab === 'albums') {
+                renderGroupGrid(container, 'album', 'album', searchVal);
+            } else if (activeLibTab === 'artists') {
+                renderGroupGrid(container, 'artist', 'person', searchVal);
+            } else if (activeLibTab === 'folders') {
+                renderGroupGrid(container, 'folderPath', 'folder', searchVal);
+            } else if (activeLibTab === 'playlists') {
+                renderPlaylistsView(container, searchVal);
+            }
+        }
+
+        function renderTracksList(tracks, container) {
+            if (tracks.length === 0) {
+                container.innerHTML = `<div class="text-center py-10 text-xs" style="color: var(--md-sys-color-text-sub);">Нет треков в списке</div>`;
+                return;
+            }
+
+            tracks.forEach((track) => {
+                const originalIndex = playlist.indexOf(track);
+                const isActive = originalIndex === currentTrackIndex;
+
+                const card = document.createElement('div');
+                card.className = `p-3 rounded-2xl flex items-center justify-between cursor-pointer transition-all border ${
+                    track.hidden ? 'opacity-50 border-amber-500/30' : ''
+                } ${
+                    isActive ? 'border-cyan-500/40 md-primary-container shadow-md' : 'border-transparent md-surface hover:bg-white/5'
+                }`;
+
+                const coverStyle = track.coverArt 
+                    ? `background-image: url(${track.coverArt}); background-size: cover; background-position: center;` 
+                    : '';
+
+                card.innerHTML = `
+                    <div class="flex items-center space-x-3 overflow-hidden min-w-0 pr-2">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 overflow-hidden ${
+                            isActive && !track.coverArt ? 'bg-cyan-400 text-slate-950 font-bold' : ''
+                        }" style="${coverStyle || 'background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-primary);'}">
+                            ${track.coverArt ? '' : (isActive && isPlaying 
+                                ? '<span class="material-symbols-outlined text-xl animate-pulse">graphic_eq</span>' 
+                                : '<span class="material-symbols-outlined text-xl" style="color: var(--md-sys-color-primary);">music_note</span>')
+                        }
+                        </div>
+                        <div class="overflow-hidden min-w-0">
+                            <h4 class="text-xs font-bold truncate leading-tight ${isActive ? 'text-white' : ''}" style="${isActive ? '' : 'color: var(--md-sys-color-text);'}">
+                                ${track.title} ${track.hidden ? '<span class="text-[10px] text-amber-400 font-normal">(скрыт)</span>' : ''}
+                            </h4>
+                            <p class="text-[11px] truncate mt-0.5" style="color: var(--md-sys-color-text-sub);">${track.artist}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-1 shrink-0">
+                        <button class="w-7 h-7 rounded-full flex items-center justify-center opacity-80 hover:opacity-100 hover:bg-white/10 text-cyan-400 cursor-pointer" title="Редактировать" onclick="event.stopPropagation(); openEditTrackModal(${originalIndex})" style="color: var(--md-sys-color-primary);">
+                            <span class="material-symbols-outlined text-base">edit</span>
+                        </button>
+                        <button class="w-7 h-7 rounded-full flex items-center justify-center opacity-70 hover:opacity-100 hover:bg-white/10 cursor-pointer" title="${track.hidden ? 'Показать' : 'Скрыть'}" onclick="event.stopPropagation(); toggleHideTrack(${originalIndex})" style="color: var(--md-sys-color-text-sub);">
+                            <span class="material-symbols-outlined text-base ${track.hidden ? 'text-amber-400' : ''}">${track.hidden ? 'visibility' : 'visibility_off'}</span>
+                        </button>
+                        <button class="w-7 h-7 rounded-full flex items-center justify-center opacity-70 hover:opacity-100 hover:bg-white/10 text-rose-400 cursor-pointer" title="Удалить" onclick="event.stopPropagation(); removeTrack(${originalIndex})">
+                            <span class="material-symbols-outlined text-base">delete</span>
+                        </button>
+                        <button class="w-7 h-7 rounded-full flex items-center justify-center opacity-80 hover:opacity-100 hover:bg-white/10 cursor-pointer" title="В избранное" onclick="event.stopPropagation(); toggleFavorite(${originalIndex})" style="color: var(--md-sys-color-text-sub);">
+                            <span class="material-symbols-outlined text-base ${track.favorite ? 'fill text-rose-400' : ''}">favorite</span>
+                        </button>
+                    </div>
+                `;
+
+                card.addEventListener('click', () => {
+                    const currentFilteredTracks = tracks.map(t => playlist.indexOf(t));
+                    playTrack(originalIndex, currentFilteredTracks);
+                });
+                container.appendChild(card);
+            });
+        }
+
+        function toggleFavorite(idx) {
+            if (idx < 0 || idx >= playlist.length) return;
+            playlist[idx].favorite = !playlist[idx].favorite;
+            saveTrackToDB(playlist[idx]);
+
+            if (idx === currentTrackIndex) {
+                document.getElementById('favoriteBtn').querySelector('span').classList.toggle('fill', playlist[idx].favorite);
+            }
+
+            showToast(playlist[idx].favorite ? "Добавлено в избранное" : "Удалено из избранного");
+            renderLibraryContent();
+        }
+
+        function renderGroupGrid(container, groupKey, iconName, searchVal) {
+            const groupsMap = {};
+            const visibleList = playlist.filter(t => showHiddenItems || !t.hidden);
+
+            visibleList.forEach(t => {
+                const keyVal = t[groupKey] || 'Без названия';
+                if (!groupsMap[keyVal]) groupsMap[keyVal] = [];
+                groupsMap[keyVal].push(t);
+            });
+
+            const keys = Object.keys(groupsMap).filter(k => k.toLowerCase().includes(searchVal));
+
+            if (keys.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-xs" style="color: var(--md-sys-color-text-sub);">Записи не найдены</div>`;
+                return;
+            }
+
+            const grid = document.createElement('div');
+            grid.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 pt-1';
+
+            keys.forEach(kName => {
+                const tracks = groupsMap[kName];
+                const card = document.createElement('div');
+                card.className = 'p-3 rounded-2xl md-surface border border-white/5 flex flex-col justify-between space-y-2 cursor-pointer hover:bg-white/5 transition-all relative group';
+                
+                card.innerHTML = `
+                    <div class="relative w-full aspect-square rounded-xl bg-slate-800 flex items-center justify-center" style="background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-primary);">
+                        <span class="material-symbols-outlined text-4xl" style="color: var(--md-sys-color-primary);">${iconName}</span>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold truncate" style="color: var(--md-sys-color-text);">${kName}</h4>
+                        <p class="text-[11px] opacity-70 mt-0.5" style="color: var(--md-sys-color-text-sub);">${tracks.length} треков</p>
+                    </div>
+                `;
+                card.addEventListener('click', () => {
+                    const groupTrackIndices = tracks.map(t => playlist.indexOf(t));
+                    playTrack(groupTrackIndices[0], groupTrackIndices);
+                    showToast(`Воспроизведение: ${kName}`);
+                });
+                grid.appendChild(card);
+            });
+
+            container.appendChild(grid);
+        }
+
+        function toggleHideTrack(idx) {
+            playlist[idx].hidden = !playlist[idx].hidden;
+            saveTrackToDB(playlist[idx]);
+            showToast(playlist[idx].hidden ? "Трек скрыт" : "Трек отображается");
+            renderLibraryContent();
+        }
+
+        async function removeTrack(idx) {
+            const track = playlist[idx];
+            await deleteTrackFromDB(track.id);
+            playlist.splice(idx, 1);
+            if (currentTrackIndex === idx) {
+                htmlAudio.pause();
+                isPlaying = false;
+                currentTrackIndex = -1;
+                updatePlayPauseUI();
+            } else if (currentTrackIndex > idx) {
+                currentTrackIndex--;
+            }
+            showToast("Трек удален");
+            updateViewVisibility();
+            renderLibraryContent();
+        }
+
+        document.getElementById('toggleShowHiddenBtn').addEventListener('click', () => {
+            showHiddenItems = !showHiddenItems;
+            const icon = document.getElementById('toggleShowHiddenIcon');
+            const btn = document.getElementById('toggleShowHiddenBtn');
+            if (showHiddenItems) {
+                icon.textContent = 'visibility';
+                btn.style.color = 'var(--md-sys-color-primary)';
+                showToast("Показ скрытых треков ВКЛ");
+            } else {
+                icon.textContent = 'visibility_off';
+                btn.style.color = 'var(--md-sys-color-text-sub)';
+                showToast("Скрытые треки спрятаны");
+            }
+            renderLibraryContent();
+        });
+
+        let playlistCoverArt = null;
+
+        function renderPlaylistsView(container, searchVal) {
+            if (playlistsStore.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 space-y-3">
+                        <span class="material-symbols-outlined text-4xl opacity-40" style="color: var(--md-sys-color-text-sub);">queue_music</span>
+                        <p class="text-xs" style="color: var(--md-sys-color-text-sub);">Создайте ваш первый плейлист</p>
+                    </div>
+                `;
+                return;
+            }
+
+            playlistsStore.forEach((pl, idx) => {
+                const card = document.createElement('div');
+                card.className = 'p-3 rounded-2xl md-surface border border-white/5 flex items-center justify-between cursor-pointer hover:bg-white/5 transition-all';
+                
+                const coverStyle = pl.coverArt 
+                    ? `background-image: url(${pl.coverArt}); background-size: cover; background-position: center;` 
+                    : '';
+
+                card.innerHTML = `
+                    <div class="flex items-center space-x-3 overflow-hidden flex-1 pr-2">
+                        <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-lg shrink-0 overflow-hidden" style="${coverStyle || 'background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-primary);'}">
+                            ${pl.coverArt ? '' : '<span class="material-symbols-outlined text-xl">queue_music</span>'}
+                        </div>
+                        <div class="overflow-hidden min-w-0 flex-1">
+                            <h4 class="text-xs font-bold truncate" style="color: var(--md-sys-color-text);">${pl.name}</h4>
+                            <p class="text-[11px] opacity-70 mt-0.5" style="color: var(--md-sys-color-text-sub);">${pl.trackIds.length} треков</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-1 shrink-0">
+                        <button class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/10 cursor-pointer" style="color: var(--md-sys-color-primary);" onclick="event.stopPropagation(); playPlaylist(${idx})" title="Воспроизвести">
+                            <span class="material-symbols-outlined text-xl">play_arrow</span>
+                        </button>
+                        <button class="w-8 h-8 rounded-full flex items-center justify-center text-rose-400 opacity-80 hover:opacity-100 hover:bg-white/10 cursor-pointer" onclick="event.stopPropagation(); deletePlaylist(${idx})" title="Удалить">
+                            <span class="material-symbols-outlined text-lg">delete</span>
+                        </button>
+                    </div>
+                `;
+                card.addEventListener('click', () => openPlaylistDetails(idx));
+                container.appendChild(card);
+            });
+        }
+
+        document.getElementById('openCreatePlaylistModalBtn').addEventListener('click', openCreatePlaylistModal);
+        document.getElementById('closePlaylistModalBtn').addEventListener('click', closeCreatePlaylistModal);
+
+        function openCreatePlaylistModal() {
+            const modal = document.getElementById('createPlaylistModal');
+            document.getElementById('plNameInput').value = '';
+            playlistCoverArt = null;
+            updatePlaylistCoverPreview(null);
+
+            const picker = document.getElementById('plTrackPickerList');
+            picker.innerHTML = '';
+
+            playlist.forEach(t => {
+                const item = document.createElement('label');
+                item.className = 'flex items-center space-x-2 text-xs p-1.5 rounded-lg hover:bg-white/5 cursor-pointer';
+                item.innerHTML = `
+                    <input type="checkbox" value="${t.id}" class="pl-track-cb rounded text-cyan-500 focus:ring-0">
+                    <span class="truncate flex-1" style="color: var(--md-sys-color-text);">${t.title} - ${t.artist}</span>
+                `;
+                picker.appendChild(item);
+            });
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('scale-95');
+        }
+
+        function closeCreatePlaylistModal() {
+            const modal = document.getElementById('createPlaylistModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.add('scale-95');
+        }
+
+        function updatePlaylistCoverPreview(coverUrl) {
+            const preview = document.getElementById('plCoverPreview');
+            const icon = document.getElementById('plCoverIcon');
+            const removeBtn = document.getElementById('removePlCoverBtn');
+
+            if (coverUrl) {
+                preview.style.backgroundImage = `url(${coverUrl})`;
+                icon.style.display = 'none';
+                removeBtn.classList.remove('hidden');
+            } else {
+                preview.style.backgroundImage = '';
+                icon.style.display = 'block';
+                removeBtn.classList.add('hidden');
+            }
+        }
+
+        document.getElementById('selectPlCoverBtn').addEventListener('click', () => document.getElementById('plCoverInput').click());
+        document.getElementById('plCoverInput').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (evt) => {
+                playlistCoverArt = evt.target.result;
+                updatePlaylistCoverPreview(playlistCoverArt);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        document.getElementById('removePlCoverBtn').addEventListener('click', () => {
+            playlistCoverArt = null;
+            updatePlaylistCoverPreview(null);
+        });
+
+        document.getElementById('savePlaylistBtn').addEventListener('click', async () => {
+            const nameInput = document.getElementById('plNameInput').value.trim();
+            const name = nameInput || 'Мой плейлист';
+
+            const checkboxes = document.querySelectorAll('.pl-track-cb:checked');
+            const selectedTrackIds = Array.from(checkboxes).map(cb => cb.value);
+
+            const newPlaylist = {
+                id: 'pl-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6),
+                name: name,
+                coverArt: playlistCoverArt,
+                trackIds: selectedTrackIds
+            };
+
+            playlistsStore.push(newPlaylist);
+            await savePlaylistsToDB();
+            closeCreatePlaylistModal();
+            renderLibraryContent();
+            showToast("Плейлист создан!");
+        });
+
+        let currentOpenedPlaylistIdx = -1;
+
+        function openPlaylistDetails(plIdx) {
+            currentOpenedPlaylistIdx = plIdx;
+            const pl = playlistsStore[plIdx];
+            if (!pl) return;
+
+            document.getElementById('playlistDetailsTitle').textContent = pl.name;
+            const tracksListContainer = document.getElementById('playlistDetailsTracksList');
+            tracksListContainer.innerHTML = '';
+
+            const plTracks = pl.trackIds.map(id => playlist.find(t => t.id === id)).filter(Boolean);
+
+            if (plTracks.length === 0) {
+                tracksListContainer.innerHTML = `<div class="text-center py-10 text-xs" style="color: var(--md-sys-color-text-sub);">В плейлисте нет треков</div>`;
+            } else {
+                const plTrackIndices = plTracks.map(t => playlist.indexOf(t)).filter(idx => idx !== -1);
+
+                plTracks.forEach((track) => {
+                    const globalIdx = playlist.indexOf(track);
+                    const item = document.createElement('div');
+                    item.className = 'p-2.5 rounded-xl md-surface-variant flex items-center justify-between cursor-pointer hover:bg-white/5';
+                    item.innerHTML = `
+                        <div class="overflow-hidden pr-2">
+                            <h4 class="text-xs font-bold truncate" style="color: var(--md-sys-color-text);">${track.title}</h4>
+                            <p class="text-[10px] truncate" style="color: var(--md-sys-color-text-sub);">${track.artist}</p>
+                        </div>
+                        <span class="material-symbols-outlined text-lg shrink-0" style="color: var(--md-sys-color-primary);">play_arrow</span>
+                    `;
+                    item.addEventListener('click', () => {
+                        if (globalIdx !== -1) {
+                            playTrack(globalIdx, plTrackIndices);
+                            closePlaylistDetailsModal();
+                        }
+                    });
+                    tracksListContainer.appendChild(item);
+                });
+            }
+
+            const detailsModal = document.getElementById('playlistDetailsModal');
+            detailsModal.classList.remove('opacity-0', 'pointer-events-none');
+            detailsModal.querySelector('div').classList.remove('scale-95');
+        }
+
+        function closePlaylistDetailsModal() {
+            const detailsModal = document.getElementById('playlistDetailsModal');
+            detailsModal.classList.add('opacity-0', 'pointer-events-none');
+            detailsModal.querySelector('div').classList.add('scale-95');
+        }
+
+        document.getElementById('closePlaylistDetailsBtn').addEventListener('click', closePlaylistDetailsModal);
+
+        function playPlaylist(plIdx) {
+            const pl = playlistsStore[plIdx];
+            if (!pl || pl.trackIds.length === 0) {
+                showToast("Плейлист пуст");
+                return;
+            }
+            const plTrackIndices = pl.trackIds.map(id => playlist.findIndex(t => t.id === id)).filter(idx => idx !== -1);
+            if (plTrackIndices.length > 0) {
+                playTrack(plTrackIndices[0], plTrackIndices);
+                showToast(`Воспроизведение: ${pl.name}`);
+            }
+        }
+
+        document.getElementById('playEntirePlaylistBtn').addEventListener('click', () => {
+            if (currentOpenedPlaylistIdx !== -1) {
+                playPlaylist(currentOpenedPlaylistIdx);
+                closePlaylistDetailsModal();
+            }
+        });
+
+        async function deletePlaylist(plIdx) {
+            playlistsStore.splice(plIdx, 1);
+            await savePlaylistsToDB();
+            renderLibraryContent();
+            showToast("Плейлист удален");
+        }
+
+        let currentEditingTrackIdx = -1;
+        let trackEditCoverArt = null;
+
+        function openEditTrackModal(idx) {
+            currentEditingTrackIdx = idx;
+            const track = playlist[idx];
+            if (!track) return;
+
+            document.getElementById('editTrackTitleInput').value = track.title || '';
+            document.getElementById('editTrackArtistInput').value = track.artist || '';
+            document.getElementById('editTrackAlbumInput').value = track.album || '';
+            
+            trackEditCoverArt = track.coverArt || null;
+            updateEditCoverPreview(trackEditCoverArt);
+
+            const modal = document.getElementById('editTrackModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('scale-95');
+        }
+
+        function closeEditTrackModal() {
+            const modal = document.getElementById('editTrackModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.add('scale-95');
+        }
+
+        document.getElementById('closeEditTrackModalBtn').addEventListener('click', closeEditTrackModal);
+
+        function updateEditCoverPreview(coverUrl) {
+            const preview = document.getElementById('editCoverPreview');
+            const icon = document.getElementById('editCoverIcon');
+
+            if (coverUrl) {
+                preview.style.backgroundImage = `url(${coverUrl})`;
+                icon.style.display = 'none';
+            } else {
+                preview.style.backgroundImage = '';
+                icon.style.display = 'block';
+            }
+        }
+
+        document.getElementById('selectCoverBtn').addEventListener('click', () => document.getElementById('editCoverInput').click());
+        document.getElementById('editCoverInput').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (evt) => {
+                trackEditCoverArt = evt.target.result;
+                updateEditCoverPreview(trackEditCoverArt);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        document.getElementById('removeCoverBtn').addEventListener('click', () => {
+            trackEditCoverArt = null;
+            updateEditCoverPreview(null);
+        });
+
+        document.getElementById('saveTrackEditBtn').addEventListener('click', async () => {
+            if (currentEditingTrackIdx < 0 || currentEditingTrackIdx >= playlist.length) return;
+
+            const track = playlist[currentEditingTrackIdx];
+            track.title = document.getElementById('editTrackTitleInput').value.trim() || 'Без названия';
+            track.artist = document.getElementById('editTrackArtistInput').value.trim() || 'Неизвестный исполнитель';
+            track.album = document.getElementById('editTrackAlbumInput').value.trim() || 'Разное';
+            track.coverArt = trackEditCoverArt;
+
+            await saveTrackToDB(track);
+            closeEditTrackModal();
+            renderLibraryContent();
+
+            if (currentEditingTrackIdx === currentTrackIndex) {
+                document.getElementById('trackTitle').textContent = track.title;
+                document.getElementById('trackArtist').textContent = track.artist;
+                document.getElementById('miniTitle').textContent = track.title;
+                document.getElementById('miniArtist').textContent = track.artist;
+                updateTrackCoverUI(track);
+            }
+
+            showToast("Трек обновлен!");
+        });
+
+        const themesList = ['obsidian', 'coral', 'seafoam', 'berry', 'lime'];
+        let themeIdx = 0;
+
+        document.getElementById('themeToggleBtn').addEventListener('click', async () => {
+            themeIdx = (themeIdx + 1) % themesList.length;
+            const chosenTheme = themesList[themeIdx];
+            document.documentElement.setAttribute('data-theme', chosenTheme);
+            await saveSetting('currentTheme', chosenTheme);
+            showToast(`Тема: ${chosenTheme}`);
+        });
+
+        document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const targetTab = e.currentTarget.getAttribute('data-tab');
+                switchTab(targetTab);
+            });
+        });
+
+        function switchTab(tabId) {
+            activeTab = tabId;
+
+            document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+                const indicator = btn.querySelector('.nav-indicator');
+                const label = btn.querySelector('span:last-child');
+                const icon = btn.querySelector('.material-symbols-outlined');
+
+                if (btn.getAttribute('data-tab') === tabId) {
+                    indicator.classList.add('md-pill-active');
+                    icon.classList.add('fill');
+                    label.style.color = 'var(--md-sys-color-text)';
+                } else {
+                    indicator.classList.remove('md-pill-active');
+                    icon.classList.remove('fill');
+                    label.style.color = 'var(--md-sys-color-text-sub)';
+                }
+            });
+
+            document.getElementById('viewNowPlaying').classList.add('hidden');
+            document.getElementById('viewLibrary').classList.add('hidden');
+            document.getElementById('viewEqualizer').classList.add('hidden');
+            document.getElementById('viewCustom').classList.add('hidden');
+
+            if (tabId === 'nowPlaying') {
+                updateViewVisibility();
+            } else if (tabId === 'library') {
+                document.getElementById('viewLibrary').classList.remove('hidden');
+                renderLibraryTabs();
+                renderLibraryContent();
+            } else if (tabId === 'equalizer') {
+                document.getElementById('viewEqualizer').classList.remove('hidden');
+            } else if (tabId === 'custom') {
+                document.getElementById('viewCustom').classList.remove('hidden');
+            }
+        }
+
+        document.getElementById('playPauseFab').addEventListener('click', togglePlayPause);
+        document.getElementById('miniPlayBtn').addEventListener('click', togglePlayPause);
+        document.getElementById('nextBtn').addEventListener('click', nextTrack);
+        document.getElementById('miniNextBtn').addEventListener('click', nextTrack);
+        document.getElementById('prevBtn').addEventListener('click', prevTrack);
+
+        document.getElementById('shuffleBtn').addEventListener('click', () => {
+            isShuffle = !isShuffle;
+            const btn = document.getElementById('shuffleBtn');
+            btn.style.color = isShuffle ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-text-sub)';
+            showToast(isShuffle ? "Перемешивание ВКЛ" : "Перемешивание ВЫКЛ");
+        });
+
+        document.getElementById('repeatBtn').addEventListener('click', () => {
+            repeatMode = (repeatMode + 1) % 3;
+            const btn = document.getElementById('repeatBtn');
+            const icon = btn.querySelector('span');
+
+            if (repeatMode === 0) {
+                btn.style.color = 'var(--md-sys-color-text-sub)';
+                icon.textContent = 'repeat';
+                showToast("Повтор выключен");
+            } else if (repeatMode === 1) {
+                btn.style.color = 'var(--md-sys-color-primary)';
+                icon.textContent = 'repeat';
+                showToast("Повтор всех треков");
+            } else if (repeatMode === 2) {
+                btn.style.color = 'var(--md-sys-color-primary)';
+                icon.textContent = 'repeat_one';
+                showToast("Повтор текущего трека");
+            }
+        });
+
+        const progressBar = document.getElementById('progressBar');
+        progressBar.addEventListener('input', (e) => {
+            if (!htmlAudio.duration) return;
+            const val = parseFloat(e.target.value);
+            htmlAudio.currentTime = (val / 100) * htmlAudio.duration;
+        });
+
+        document.getElementById('searchInput').addEventListener('input', renderLibraryContent);
+
+        const miniPlayerBar = document.getElementById('miniPlayerBar');
+        document.getElementById('miniPlayerClickArea').addEventListener('click', () => {
+            switchTab('nowPlaying');
+        });
+
+        htmlAudio.addEventListener('play', () => {
+            miniPlayerBar.classList.remove('translate-y-full', 'opacity-0');
+        });
+
+        /* Equalizer Sliders Setup */
+        const eqBands = [0, 1, 2, 3, 4];
+        eqBands.forEach(idx => {
+            const slider = document.getElementById(`eqBand${idx}`);
+            const valLabel = document.getElementById(`eqVal${idx}`);
+
+            slider.addEventListener('input', (e) => {
+                const gainVal = parseFloat(e.target.value);
+                valLabel.textContent = `${gainVal > 0 ? '+' : ''}${gainVal} dB`;
+                if (eqFilters[idx]) {
+                    eqFilters[idx].gain.value = gainVal;
+                }
+                saveSetting(`eqBand_${idx}`, gainVal);
+            });
+        });
+
+        const presets = {
+            flat: [0, 0, 0, 0, 0],
+            bass: [6, 4, 0, -2, -3],
+            pop: [-1, 2, 5, 3, -1],
+            rock: [4, 2, -1, 3, 5]
+        };
+
+        document.querySelectorAll('.eq-preset-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.eq-preset-btn').forEach(b => {
+                    b.classList.remove('md-pill-active');
+                    b.classList.add('md-surface-variant');
+                    b.style.color = 'var(--md-sys-color-text)';
+                });
+                const target = e.currentTarget;
+                target.classList.add('md-pill-active');
+                target.classList.remove('md-surface-variant');
+                target.style.color = '';
+
+                const presetName = target.getAttribute('data-preset');
+                const gains = presets[presetName];
+
+                if (gains) {
+                    gains.forEach((g, i) => {
+                        const slider = document.getElementById(`eqBand${i}`);
+                        const label = document.getElementById(`eqVal${i}`);
+                        slider.value = g;
+                        label.textContent = `${g > 0 ? '+' : ''}${g} dB`;
+                        if (eqFilters[i]) eqFilters[i].gain.value = g;
+                        saveSetting(`eqBand_${i}`, g);
+                    });
+                    showToast(`Пресет: ${target.textContent.trim()}`);
+                }
+            });
+        });
+
+        const speedSelect = document.getElementById('speedSelect');
+        speedSelect.addEventListener('change', (e) => {
+            const val = parseFloat(e.target.value);
+            htmlAudio.playbackRate = val;
+            showToast(`Скорость: ${val}x`);
+        });
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastNotification');
+            const msgSpan = document.getElementById('toastMsg');
+            msgSpan.textContent = msg;
+
+            toast.classList.remove('opacity-0', 'pointer-events-none', 'top-14');
+            toast.classList.add('top-16');
+
+            if (window._toastTimeout) clearTimeout(window._toastTimeout);
+            window._toastTimeout = setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none', 'top-14');
+                toast.classList.remove('top-16');
+            }, 2400);
+        }
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                await initDB();
+
+                const savedTheme = await getSetting('currentTheme');
+                if (savedTheme) {
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+                    themeIdx = THEMES.indexOf(savedTheme);
+                    if (themeIdx === -1) themeIdx = 0;
+                }
+
+                const savedWallpaper = await getSetting('customWallpaper');
+                if (savedWallpaper) {
+                    applyWallpaper(savedWallpaper);
+                }
+
+                const savedBlur = await getSetting('wallpaperBlur');
+                if (savedBlur !== null) {
+                    document.getElementById('wallpaperBlur').value = savedBlur;
+                }
+
+                const savedDim = await getSetting('wallpaperDim');
+                if (savedDim !== null) {
+                    document.getElementById('wallpaperDim').value = savedDim;
+                }
+                updateWallpaperBlurDim();
+
+                const savedViz = await getSetting('visualizerStyle');
+                if (savedViz) {
+                    visualizerStyle = savedViz;
+                    document.querySelectorAll('.viz-style-btn').forEach(b => {
+                        if (b.getAttribute('data-viz') === savedViz) {
+                            b.classList.add('md-pill-active');
+                            b.classList.remove('md-surface-variant');
+                        } else {
+                            b.classList.remove('md-pill-active');
+                            b.classList.add('md-surface-variant');
+                        }
+                    });
+                }
+
+                eqBands.forEach(async (idx) => {
+                    const savedGain = await getSetting(`eqBand_${idx}`);
+                    if (savedGain !== null) {
+                        const slider = document.getElementById(`eqBand${idx}`);
+                        const label = document.getElementById(`eqVal${idx}`);
+                        slider.value = savedGain;
+                        label.textContent = `${savedGain > 0 ? '+' : ''}${savedGain} dB`;
+                    }
+                });
+
+                playlist = await getAllTracksFromDB();
+                playlistsStore = await loadPlaylistsFromDB();
+
+                updateViewVisibility();
+                renderLibraryTabs();
+                renderLibraryContent();
+
+                if (playlist.length > 0) {
+                    playTrack(0);
+                    htmlAudio.pause();
+                    isPlaying = false;
+                    updatePlayPauseUI();
+                }
+            } catch (err) {
+                console.error("Initialization error:", err);
+            }
+        });
+    </script>
+</body>
+</html>
