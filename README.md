@@ -1,44 +1,43 @@
-# 🎵 uPlayer — Аудиоплеер в стиле Material You прямо в вашем браузере!
+# 🎵 uPlayer — A Material You-style audio player right in your browser!
 
-uPlayer — это стильный, современный и конфиденциальный веб-аудиоплеер, который работает полностью внутри вашего браузера. Его интерфейс выполнен в минималистичном дизайне Material You.
+uPlayer is a sleek, modern, and privacy-focused web audio player that runs entirely in your browser. Its interface features a clean, minimalist design inspired by the Material You style.
 
-**Установка не требуется. Без регистраций. Просто откройте файл и слушайте.**
-
----
-
-## ✨ Особенности
-* **Интерфейс Material You:** Современный и лаконичный внешний вид, адаптированный под системную тему.
-* **100% локальная работа (Client-Side):** Ваша музыка никогда не покидает ваш компьютер. Никаких серверов, никакого трекинга.
-* **Чистый и легковесный:** Создан на базе стандартных веб-технологий без лишнего перегруженного кода. Работает быстро и плавно.
-* **Поддержка форматов:** Воспроизводит MP3, WAV, OGG, FLAC и M4A напрямую из вашего локального хранилища.
-* **Улучшение звука:** Встроенный эквалайзер, воспроизведение без пауз (gapless) и нормализация громкости.
+**No installation required. No accounts. Just open the file and play.**
 
 ---
 
-## 🚀 Как запустить
-
-Поскольку uPlayer является автономным веб-приложением, оно разделено на две версии для вашего удобства:
-
-1. **Выберите и скачайте** нужный файл в зависимости от вашего устройства:
-   * [uPlayer-PC.html](uPlayer-PC.html) — версия с интерфейсом для компьютеров и ноутбуков.
-   * [uPlayer-Mobile.html](uPlayer-Mobile.html) — версия, оптимизированная под экраны смартфонов.
-2. **Кликните дважды** по скачанному файлу (на ПК) или откройте его через любой мобильный браузер (на телефоне).
-3. **Перетащите (Drag and drop)** или выберите ваши аудиофайлы через меню плеера, чтобы начать прослушивание.
+## ✨ Features
+* **Material You Interface:** Modern, clean, and adaptive UI designed to match your system theme preferences.
+* **100% Client-Side:** Your music never leaves your computer or phone. No servers, no tracking.
+* **Pure & Lightweight:** Built using standard web technologies without heavy dependencies. Fast and responsive.
+* **Format Support:** Plays MP3, WAV, OGG, FLAC, and M4A directly from your local storage.
+* **Audio Enhancements:** Built-in equalizer, gapless playback, and volume normalization.
 
 ---
 
+## 🚀 How to Use
 
-## ⚖️ Правовая информация и отказ от ответственности
+Since uPlayer is a standalone web application, it is divided into two separate versions optimized for different screen sizes:
 
-### 📝 Отказ от ответственности (Disclaimer)
-* **Программа предоставляется «Как есть» (As-Is):** Данное программное обеспечение предоставляется без каких-либо явных или подразумеваемых гарантий. Все риски, связанные с качеством и работой плеера, лежат исключительно на пользователе.
-* **Освобождение от ответственности:** Ни при каких обстоятельствах автор не несет ответственности за любые претензии, убытки или иные обязательства, возникшие в результате использования или невозможности использования данного программного обеспечения.
-* **Данные и конфиденциальность:** uPlayer работает на 100% локально. Он не собирает, не хранит и не передает личные данные, аналитику или аудиофайлы. Разработчик не несет ответственности за потерю локальных данных или сбои в работе браузера.
+1. **Download** the appropriate file for your device:
+   * [uPlayer-PC.html](uPlayer-PC.html) — Optimized interface for desktop PCs and laptops.
+   * [uPlayer-Mobile.html](uPlayer-Mobile.html) — Tailored interface layout for smartphones and tablets.
+2. **Double-click** the downloaded file (on PC) or open it using any mobile browser (on your phone).
+3. **Drag and drop** your audio files or use the app menu to select your music and start listening.
 
-### 🔏 Авторские права и товарные знаки (Copyright & Trademarks)
-* **Код uPlayer:** Авторское право © 2026 yui-legend. Все права защищены.
-* **Material Design / Material You:** «Material Design» и «Material You» являются товарными знаками компании Google LLC. Этот проект является независимой open-source реализацией и **не** связан с Google LLC, не поддерживается и не спонсируется ею.
-* **Сторонний контент:** Пользователи несут единоличную ответственность за аудиофайлы, которые они загружают в uPlayer. Разработчик не предоставляет, не хранит и не одобряет использование защищенных авторским правом аудиоматериалов без надлежащего разрешения от правообладателей.
+---
 
-### 📜 Лицензия
-Этот проект распространяется под **лицензией MIT**. Вы можете свободно использовать, изменять и распространять этот HTML-файл при условии сохранения исходного уведомления об авторских правах. Подробности см. в файле [LICENSE](LICENSE).
+## ⚖️ Legal Information & Disclaimers
+
+### 📝 Disclaimer
+* **As-Is Basis:** This software is provided "as is" without warranties of any kind, either express or implied. The entire risk as to the quality and performance of the software is with you.
+* **No Liability:** In no event shall the author be liable for any claim, damages, or other liability arising from, out of, or in connection with the software or the use of the software.
+* **Data & Privacy:** uPlayer operates 100% locally. It does not collect, store, or transmit any personal data, analytics, or audio files. The developer is not responsible for any local data loss or browser-related crashes.
+
+### 🔏 Copyright & Trademarks
+* **uPlayer Code:** Copyright © 2026 yui-legend. All rights reserved.
+* **Material Design / Material You:** "Material Design" and "Material You" are trademarks of Google LLC. This project is an independent open-source implementation and is **not** affiliated with, endorsed by, or sponsored by Google LLC.
+* **Third-Party Content:** Users are solely responsible for the audio files they load into uPlayer. The developer does not provide, host, or condone the use of copyrighted audio material without proper authorization from the respective rights holders.
+
+### 📜 License
+This project is licensed under the **MIT License**. You are free to use, modify, and distribute this software, provided that the original copyright notice remains intact. See the [LICENSE](LICENSE) file for details.
