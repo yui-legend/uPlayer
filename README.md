@@ -1,43 +1,43 @@
-# 🎵 uPlayer — A Material You-style audio player right in your browser!
+# 🎵 uPlayer — веб-аудиоплеер в стиле Material You
 
-uPlayer is a sleek, modern, and privacy-focused web audio player that runs entirely in your browser. Its interface features a clean, minimalist design inspired by the Material You style.
+uPlayer — это современный, конфиденциальный и минималистичный веб-аудиоплеер, функционирующий полностью в браузере пользователя. Интерфейс приложения разработан в соответствии с дизайн-системой Material You от компании Google.
 
-**No installation required. No accounts. Just open the file and play.**
+Продукт не требует установки, регистрации или создания учетной записи. Запуск осуществляется открытием локального файла.
 
----
+## ✨ Ключевые характеристики
 
-## ✨ Features
-* **Material You Interface:** Modern, clean, and adaptive UI designed to match your system theme preferences.
-* **100% Client-Side:** Your music never leaves your computer or phone. No servers, no tracking.
-* **Pure & Lightweight:** Built using standard web technologies without heavy dependencies. Fast and responsive.
-* **Format Support:** Plays MP3, WAV, OGG, FLAC, and M4A directly from your local storage.
-* **Audio Enhancements:** Built-in equalizer, gapless playback, and volume normalization.
+* **Интерфейс Material You**: современный, лаконичный и адаптивный дизайн, автоматически синхронизирующийся с системной темой вашего устройства.
+* **100% Client-Side (Локальная работа)**: обработка аудиофайлов происходит исключительно на устройстве пользователя. Данные не передаются на внешние серверы, трекинг отсутствует.
+* **Минимализм и производительность**: приложение разработано на базе стандартных веб-технологий без использования ресурсоемких зависимостей, что обеспечивает высокую скорость работы.
+* **Поддержка форматов**: корректное воспроизведение файлов MP3, WAV, OGG, FLAC и M4A напрямую из локального хранилища.
+* **Обработка звука**: встроенный эквалайзер, функция непрерывного воспроизведения (gapless playback) и автоматическая нормализация громкости.
 
----
+## 🚀 Инструкция по эксплуатации
 
-## 🚀 How to Use
+uPlayer разработан как автономное веб-приложение и поставляется в двух версиях, оптимизированных под различные типы экранов:
 
-Since uPlayer is a standalone web application, it is divided into two separate versions optimized for different screen sizes:
-
-1. **Download** the appropriate file for your device:
-   * [uPlayer-PC.html](uPlayer-PC.html) — Optimized interface for desktop PCs and laptops.
-   * [uPlayer-Mobile.html](uPlayer-Mobile.html) — Tailored interface layout for smartphones and tablets.
-2. **Double-click** the downloaded file (on PC) or open it using any mobile browser (on your phone).
-3. **Drag and drop** your audio files or use the app menu to select your music and start listening.
+1. **Загрузите необходимый файл** из репозитория в соответствии с вашим устройством:
+   * `uPlayer-PC.html` — интерфейс, оптимизированный для персональных компьютеров и ноутбуков.
+   * `uPlayer-Mobile.html` — интерфейс, адаптированный для смартфонов и планшетных компьютеров.
+2. **Откройте загруженный файл**: дважды кликните по нему (на ПК) или запустите с помощью любого мобильного браузера (на смартфоне/планшете).
+3. **Добавьте медиафайлы**: перетащите аудиозаписи в окно плеера (Drag-and-Drop) либо воспользуйтесь встроенным меню приложения для выбора треков и начала прослушивания.
 
 ---
 
-## ⚖️ Legal Information & Disclaimers
+## ⚖️ Юридическая информация и правовые оговорки
 
-### 📝 Disclaimer
-* **As-Is Basis:** This software is provided "as is" without warranties of any kind, either express or implied. The entire risk as to the quality and performance of the software is with you.
-* **No Liability:** In no event shall the author be liable for any claim, damages, or other liability arising from, out of, or in connection with the software or the use of the software.
-* **Data & Privacy:** uPlayer operates 100% locally. It does not collect, store, or transmit any personal data, analytics, or audio files. The developer is not responsible for any local data loss or browser-related crashes.
+### 📝 Отказ от ответственности
 
-### 🔏 Copyright & Trademarks
-* **uPlayer Code:** Copyright © 2026 yui-legend. All rights reserved.
-* **Material Design / Material You:** "Material Design" and "Material You" are trademarks of Google LLC. This project is an independent open-source implementation and is **not** affiliated with, endorsed by, or sponsored by Google LLC.
-* **Third-Party Content:** Users are solely responsible for the audio files they load into uPlayer. The developer does not provide, host, or condone the use of copyrighted audio material without proper authorization from the respective rights holders.
+* **Условия «Как есть»**: Данное программное обеспечение предоставляется на условиях «as is» («как есть»), без каких-либо явных или подразумеваемых гарантий, включая, но не ограничиваясь, гарантиями товарной пригодности или соответствия определенным целям. Все риски, связанные с качеством и стабильностью работы программы, несет пользователь.
+* **Освобождение от ответственности**: Автор проекта ни при каких обстоятельствах не несет ответственности по любым искам, за материальный или нематериальный ущерб, возникший в результате использования или невозможности использования данного программного обеспечения.
+* **Конфиденциальность данных**: uPlayer функционирует полностью локально. Приложение не собирает, не хранит и не передает персональные данные, метрики аналитики или пользовательские аудиофайлы. Разработчик не несет ответственности за потерю локальных данных или некорректную работу веб-браузера.
 
-### 📜 License
-This project is licensed under the **MIT License**. You are free to use, modify, and distribute this software, provided that the original copyright notice remains intact. See the [LICENSE](LICENSE) file for details.
+### 🔏 Авторские права и товарные знаки
+
+* **Исходный код uPlayer**: Авторские права © 2026 yui-legend. Все права защищены.
+* **Material Design / Material You**: Названия «Material Design» и «Material You» являются зарегистрированными товарными знаками Google LLC. Данный проект представляет собой независимую реализацию с открытым исходным кодом и не связан с компанией Google LLC, не одобрен и не спонсируется ею.
+* **Сторонний контент**: Пользователи несут единоличную правовую ответственность за аудиоматериалы, загружаемые в uPlayer. Разработчик не предоставляет, не размещает на серверах и не одобряет использование контента, защищенного авторским правом, без надлежащего разрешения от правообладателей.
+
+### 📜 Лицензирование
+
+Настоящий проект распространяется под свободной лицензией **MIT**. Вы имеете право использовать, модифицировать и распространять данное программное обеспечение при обязательном сохранении оригинального уведомления об авторских правах. Подробная информация изложена в файле `LICENSE`.
